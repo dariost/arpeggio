@@ -38,5 +38,9 @@ if(DEBUG)
     set(DEFS ${DEFS} DEBUG)
 endif()
 
+if(MINGW)
+    set(DEFS ${DEFS} SDL_MAIN_HANDLED)
+endif()
+
 target_compile_definitions(arpeggio PRIVATE ${DEFS})
 
