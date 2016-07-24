@@ -10,3 +10,17 @@ endif()
 add_subdirectory(SDL2-2.0.4)
 
 set(SDL2_INCLUDES ${SDL2_SOURCE_DIR}/include PARENT_SCOPE)
+
+if(WIN32)
+    project(glew)
+
+    file(GLOB glew_SOURCES glew-2.0.0/src/glew.c)
+
+    add_library(glew STATIC ${glew_SOURCES})
+
+    target_include_directories(glew PRIVATE glew-2.0.0/include)
+
+    target_compile_definitions(glew PRIVATE -DGLEW_NO_GLU -DGLEW_BUILD)
+
+    set(glew_INCLUDES ${glew_SOURCE_DIR}/glew-2.0.0/include PARENT_SCOPE)
+endif()
