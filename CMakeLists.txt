@@ -26,12 +26,14 @@ if(WIN32)
 endif()
 set(LIBS ${LIBS} SDL2-static SDL2main)
 set(LIBS ${LIBS} jsoncpp_lib_static)
+set(LIBS ${LIBS} SDL2_image)
 
 if(WIN32)
     set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${glew_INCLUDES})
 endif()
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_INCLUDES})
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${jsoncpp_INCLUDES})
+set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_image_INCLUDES})
 
 if(MINGW)
     set(LIBS ${LIBS} -mwindows)
@@ -68,4 +70,3 @@ if(NOT WIN32)
 endif()
 
 target_compile_definitions(arpeggio PRIVATE ${DEFS})
-
