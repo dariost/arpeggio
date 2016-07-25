@@ -24,7 +24,7 @@ add_subdirectory(3rd)
 if(WIN32)
     set(LIBS ${LIBS} glew -lglu32 -lopengl32 -lgdi32 -luser32 -lkernel32)
 endif()
-set(LIBS ${LIBS} SDL2-static)
+set(LIBS ${LIBS} SDL2-static SDL2main)
 set(LIBS ${LIBS} jsoncpp_lib_static)
 
 if(WIN32)
@@ -61,10 +61,6 @@ target_compile_options(arpeggio PRIVATE ${FLAGS})
 
 if(DEBUG)
     set(DEFS ${DEFS} DEBUG)
-endif()
-
-if(MINGW)
-    set(DEFS ${DEFS} SDL_MAIN_HANDLED)
 endif()
 
 if(NOT WIN32)
