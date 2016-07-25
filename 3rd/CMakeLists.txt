@@ -10,6 +10,13 @@ add_subdirectory(SDL2-2.0.4)
 set(SDL2_INCLUDES ${SDL2_SOURCE_DIR}/include PARENT_SCOPE)
 set(SDL2_INCLUDES ${SDL2_SOURCE_DIR}/include)
 
+project(SDL2_mixer)
+file(GLOB SDL2_mixer_SOURCES SDL2_mixer-2.0.1/*.c SDL2_mixer-2.0.1/external/libogg-1.3.1/src/*.c SDL2_mixer-2.0.1/external/libvorbisidec-1.2.1/*.c)
+add_library(SDL2_mixer STATIC ${SDL2_mixer_SOURCES})
+target_include_directories(SDL2_mixer PRIVATE ${SDL2_INCLUDES})
+target_compile_definitions(SDL2_mixer PRIVATE -DOGG_MUSIC)
+set(SDL2_mixer_INCLUDES ${SDL2_mixer_SOURCE_DIR}/SDL2_mixer-2.0.1 PARENT_SCOPE)
+
 project(SDL2_image)
 file(GLOB SDL2_image_SOURCES SDL2_image-2.0.1/*.c SDL2_image-2.0.1/external/libpng-1.6.2/*.c SDL2_image-2.0.1/external/zlib-1.2.8/*.c)
 add_library(SDL2_image STATIC ${SDL2_image_SOURCES})
