@@ -7,7 +7,10 @@
 #include <GLES3/gl3.h>
 #endif
 
+#include <cerror>
+#include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <exception>
 #include <iostream>
 #include <memory>
