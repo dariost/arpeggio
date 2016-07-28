@@ -15,11 +15,6 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-#ifdef ARPEGGIO_EXPERIMENTAL_CXX17
-#include <experimental/any>
-#else
-#include <any>
-#endif
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -37,10 +32,6 @@
 #include <SDL_net.h>
 #include <SDL_ttf.h>
 #include <json.hpp>
-
-#ifdef ARPEGGIO_EXPERIMENTAL_CXX17
-using namespace std::experimental;
-#endif
 
 using namespace std;
 using namespace nlohmann;

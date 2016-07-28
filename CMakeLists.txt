@@ -5,7 +5,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake-modules/")
 project(arpeggio)
 
 option(DEBUG "Debug build" ON)
-option(EXPERIMENTAL_CXX17 "Use experimental C++17" ON)
 option(OPTIMIZE_BUILD "Use compiler optimizations" ON)
 
 file(GLOB SOURCES src/*.cpp)
@@ -60,7 +59,7 @@ if(UNIX)
     set(FLAGS ${FLAGS} -flto)
 endif()
 
-set(FLAGS ${FLAGS} -Wall -Wextra -Werror)
+set(FLAGS ${FLAGS} -Wall -Wextra -Werror -std=gnu++14)
 
 if(OPTIMIZE_BUILD)
     set(FLAGS ${FLAGS} -O3)
@@ -73,13 +72,6 @@ add_executable(arpeggio ${SOURCES})
 target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
 
 target_link_libraries(arpeggio PRIVATE ${LIBS})
-
-if(EXPERIMENTAL_CXX17)
-    set(FLAGS ${FLAGS} -std=gnu++1z)
-    set(DEFS ${DEFS} ARPEGGIO_EXPERIMENTAL_CXX17)
-else()
-    set(FLAGS ${FLAGS} -std=gnu++17)
-endif()
 
 target_compile_options(arpeggio PRIVATE ${FLAGS})
 
