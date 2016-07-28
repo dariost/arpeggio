@@ -8,6 +8,7 @@
 #endif
 
 #include <cstdlib>
+#include <exception>
 #include <iostream>
 #include <memory>
 #include <sstream>
