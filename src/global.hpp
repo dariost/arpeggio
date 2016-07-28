@@ -22,6 +22,8 @@
 #endif
 
 #ifdef _WIN32
+#include <winsock2.h>
+
 #include <io.h>
 #include <windows.h>
 #undef ERROR
@@ -34,10 +36,11 @@
 #include <SDL_mixer.h>
 #include <SDL_net.h>
 #include <SDL_ttf.h>
-#include <json/json.h>
+#include <json.hpp>
 
 #ifdef ARPEGGIO_EXPERIMENTAL_CXX17
 using namespace std::experimental;
 #endif
 
 using namespace std;
+using namespace nlohmann;

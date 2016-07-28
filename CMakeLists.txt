@@ -6,6 +6,7 @@ project(arpeggio)
 
 option(DEBUG "Debug build" ON)
 option(EXPERIMENTAL_CXX17 "Use experimental C++17" ON)
+option(OPTIMIZE_BUILD "Use compiler optimizations" ON)
 
 file(GLOB SOURCES src/*.cpp)
 
@@ -22,25 +23,29 @@ endif()
 add_subdirectory(3rd)
 
 if(WIN32)
-    set(LIBS ${LIBS} glew -lglu32 -lopengl32 -lgdi32 -luser32 -lkernel32 -lws2_32 -liphlpapi)
+    set(LIBS ${LIBS} glew -lglu32 -lopengl32 -lgdi32 -luser32 -lkernel32)
 endif()
 set(LIBS ${LIBS} SDL2-static SDL2main)
-set(LIBS ${LIBS} jsoncpp_lib_static)
 set(LIBS ${LIBS} SDL2_image)
 set(LIBS ${LIBS} SDL2_mixer)
 set(LIBS ${LIBS} SDL2_net)
-set(LIBS ${LIBS} freetype)
 set(LIBS ${LIBS} SDL2_ttf)
+set(LIBS ${LIBS} freetype)
+set(LIBS ${LIBS} bz2)
+if(WIN32)
+	set(LIBS ${LIBS} -lws2_32 -liphlpapi)
+endif()
 
 if(WIN32)
     set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${glew_INCLUDES})
 endif()
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_INCLUDES})
-set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${jsoncpp_INCLUDES})
+set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${JSON_INCLUDES})
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_image_INCLUDES})
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_mixer_INCLUDES})
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_net_INCLUDES})
 set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${SDL2_ttf_INCLUDES})
+set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${bz2_INCLUDES})
 
 if(MINGW)
     if(DEBUG)
@@ -55,7 +60,13 @@ if(UNIX)
     set(FLAGS ${FLAGS} -flto)
 endif()
 
-set(FLAGS ${FLAGS} -O3 -Wall -Wextra -Werror)
+set(FLAGS ${FLAGS} -Wall -Wextra -Werror)
+
+if(OPTIMIZE_BUILD)
+    set(FLAGS ${FLAGS} -O3)
+else()
+    set(FLAGS ${FLAGS} -O0)
+endif()
 
 add_executable(arpeggio ${SOURCES})
 
@@ -78,6 +89,10 @@ endif()
 
 if(NOT WIN32)
     set(DEFS ${DEFS} ARPEGGIO_GLES)
+endif()
+
+if(MINGW)
+    set(DEFS ${DEFS} SDL_MAIN_HANDLED)
 endif()
 
 target_compile_definitions(arpeggio PRIVATE ${DEFS})
