@@ -17,7 +17,11 @@ Application::Application(int argc, char** argv)
     log->log(Logger::Level::DEBUG, "Debug mode activated");
 #endif
     global_config = make_shared<Config>(log);
-    log->check(SDL_Init(SDL_INIT_EVERYTHING), 0, Logger::Level::CRITICAL, "Unable to initialize system: ", SDL_GetError());
+    unsigned int sdl_init_flags = SDL_INIT_EVERYTHING;
+#ifdef __EMSCRIPTEN__
+    sdl_init_flags ^= (SDL_INIT_TIMER | SDL_INIT_HAPTIC);
+#endif
+    log->check(SDL_Init(sdl_init_flags), 0, Logger::Level::CRITICAL, "Unable to initialize system: ", SDL_GetError());
     log->check(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG,
                (int)IMG_INIT_PNG,
                Logger::Level::CRITICAL,

@@ -14,7 +14,7 @@ if(DEBUG AND (NOT MSVC))
     set(FLAGS ${FLAGS} -g)
 endif()
 
-if(NOT WIN32)
+if(NOT (WIN32 OR EMSCRIPTEN))
     find_package(GLES REQUIRED)
     set(LIBS ${LIBS} ${GLES_LIBRARIES})
 endif()
