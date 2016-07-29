@@ -1,14 +1,14 @@
 #include "Object.hpp"
 
-Object::Object(shared_ptr<Logger> logger, const string& file_name, bool crypted)
+Object::Object(shared_ptr<Logger> logger, const string& file_name, bool encrypted)
 {
     log = logger;
     name = file_name;
-    (void)crypted;
+    (void)encrypted;
 #ifndef ARPEGGIO_DEBUG
 #warning Implement file encryption
 #endif
-    log->check(crypted, false, Logger::Level::CRITICAL, "File encryption is not implemented yet");
+    log->check(encrypted, false, Logger::Level::CRITICAL, "File encryption is not implemented yet");
     errno = 0;
     FILE* in = fopen(name.c_str(), "rb");
     log->check(!in, false, Logger::Level::CRITICAL, "Cannot open \"", name, "\": ", strerror(errno));
