@@ -19,4 +19,5 @@ protected:
 public:
     Application(int argc, char** argv);
     ~Application();
+    int run();
 };

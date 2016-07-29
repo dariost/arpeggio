@@ -132,7 +132,7 @@ Application::Application(int argc, char** argv)
 #ifdef ARPEGGIO_GLES
                "ES ",
 #endif
-               "context:",
+               "context: ",
                SDL_GetError());
 #ifndef ARPEGGIO_GLES
     log->check(glewInit(), GLEW_OK, Logger::Level::CRITICAL, "Cannot get OpenGL function pointers");
@@ -159,4 +159,10 @@ Application::~Application()
     Mix_Quit();
     IMG_Quit();
     SDL_Quit();
+}
+
+int Application::run()
+{
+    // TODO: do something
+    return EXIT_SUCCESS;
 }

@@ -4,5 +4,5 @@
 int main(int argc, char* argv[])
 {
     auto app = make_shared<Application>(argc, argv);
-    return 0;
+    return app->run();
 }
