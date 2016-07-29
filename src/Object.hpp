@@ -24,4 +24,4 @@ public:
                true
 #endif
            );
-}
+};

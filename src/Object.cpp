@@ -24,17 +24,17 @@ Object::Object(shared_ptr<Logger> logger, const string& file_name, bool crypted)
     data.push_back(0);
 }
 
-size_t getSize()
+size_t Object::getSize()
 {
     return data.size() - 1;
 }
 
-void* getData()
+void* Object::getData()
 {
-    return (void*)data.data();
+    return data.data();
 }
 
-const char* getString()
+const char* Object::getString()
 {
     return (const char*)data.data();
 }

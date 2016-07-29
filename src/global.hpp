@@ -7,7 +7,8 @@
 #include <GLES3/gl3.h>
 #endif
 
-#include <cerror>
+#include <cerrno>
+#include <chrono>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
