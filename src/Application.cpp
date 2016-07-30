@@ -1,5 +1,6 @@
 #include "Application.hpp"
 
+#include "GLDebug.hpp"
 #include <SDL_syswm.h>
 
 Application::Application(int argc, char** argv)
@@ -62,6 +63,9 @@ Application::Application(int argc, char** argv)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+#endif
+#ifdef ARPEGGIO_DEBUG
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 #endif
     bool fullscreen = global_config->get("fullscreen", true);
     unsigned int width, height;
@@ -147,6 +151,11 @@ Application::Application(int argc, char** argv)
     log->log(Logger::Level::INFO, "GL_SHADING_LANGUAGE_VERSION: ", get_glinfo(GL_SHADING_LANGUAGE_VERSION));
     log->log(Logger::Level::INFO, "GL_VENDOR: ", get_glinfo(GL_VENDOR));
     log->log(Logger::Level::INFO, "GL_RENDERER: ", get_glinfo(GL_RENDERER));
+#ifdef ARPEGGIO_DEBUG
+    log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "KHR_debug is not supported");
+    gldebug_init_functions(log);
+    glEnable(GL_DEBUG_OUTPUT);
+#endif
 }
 
 Application::~Application()
