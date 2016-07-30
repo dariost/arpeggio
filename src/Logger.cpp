@@ -17,7 +17,7 @@ void Logger::print(Level level, const string& message)
     if(is_tty)
     {
         if(level == DEBUG)
-            msg = ANSI_COLOR_BLUE + msg;
+            msg = ANSI_COLOR_CYAN + msg;
         else if(level == INFO)
             msg = ANSI_COLOR_GREEN + msg;
         else if(level == WARNING)
