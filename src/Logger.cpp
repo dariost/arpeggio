@@ -14,6 +14,21 @@ void Logger::print(Level level, const string& message)
     else if(level == CRITICAL)
         msg = "[CRITICAL] " + message;
 
+    if(is_tty)
+    {
+        if(level == DEBUG)
+            msg = ANSI_COLOR_CYAN + msg;
+        else if(level == INFO)
+            msg = ANSI_COLOR_GREEN + msg;
+        else if(level == WARNING)
+            msg = ANSI_COLOR_YELLOW + msg;
+        else if(level == ERROR)
+            msg = ANSI_COLOR_RED + msg;
+        else if(level == CRITICAL)
+            msg = ANSI_COLOR_MAGENTA + msg;
+        msg = msg + ANSI_COLOR_RESET;
+    }
+
     cout << msg << endl;
 }
 

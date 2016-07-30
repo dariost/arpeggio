@@ -164,5 +164,10 @@ Application::~Application()
 int Application::run()
 {
     // TODO: do something
+    log->log(Logger::Level::DEBUG, "DEBUG");
+    log->log(Logger::Level::INFO, "INFO");
+    log->log(Logger::Level::WARNING, "WARNING");
+    log->log(Logger::Level::ERROR, "ERROR");
+    log->log(Logger::Level::CRITICAL, "CRITICAL");
     return EXIT_SUCCESS;
 }
