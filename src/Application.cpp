@@ -26,6 +26,9 @@ Application::Application(int argc, char** argv)
 #ifdef __EMSCRIPTEN__
     sdl_init_flags ^= (SDL_INIT_TIMER | SDL_INIT_HAPTIC);
 #endif
+#ifdef __FreeBSD__
+    sdl_init_flags ^= SDL_INIT_HAPTIC;
+#endif
     log->check(SDL_Init(sdl_init_flags), 0, Logger::Level::CRITICAL, "Unable to initialize system: ", SDL_GetError());
     log->check(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG,
                (int)IMG_INIT_PNG,
@@ -139,7 +142,7 @@ Application::Application(int argc, char** argv)
                "context: ",
                SDL_GetError());
 #ifndef ARPEGGIO_GLES
-    log->check(glewInit(), GLEW_OK, Logger::Level::CRITICAL, "Cannot get OpenGL function pointers");
+    log->check(glewInit(), (unsigned int)GLEW_OK, Logger::Level::CRITICAL, "Cannot get OpenGL function pointers");
 #endif
     auto get_glinfo = [](unsigned int constant) -> const char* {
         auto tmp_info = glGetString(constant);
