@@ -152,7 +152,7 @@ Application::Application(int argc, char** argv)
     log->log(Logger::Level::INFO, "GL_VENDOR: ", get_glinfo(GL_VENDOR));
     log->log(Logger::Level::INFO, "GL_RENDERER: ", get_glinfo(GL_RENDERER));
 #ifdef ARPEGGIO_DEBUG
-    log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "KHR_debug is not supported");
+    log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "GL_KHR_debug is not supported");
     gldebug_init_functions(log);
     glEnable(GL_DEBUG_OUTPUT);
 #endif
