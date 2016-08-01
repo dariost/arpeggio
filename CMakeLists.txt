@@ -9,6 +9,10 @@ option(OPTIMIZE_BUILD "Use compiler optimizations" ON)
 
 message(STATUS "Building on: ${CMAKE_SYSTEM_NAME}")
 
+if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+  set(CMAKE_REQUIRED_INCLUDES "/usr/local/include" "/usr/include")
+endif()
+
 file(GLOB SOURCES src/*.cpp)
 
 if(DEBUG AND (NOT MSVC))
