@@ -79,7 +79,7 @@ if(NOT MSVC)
         set(FLAGS ${FLAGS} -std=gnu++1y)
     endif()
 
-    set(FLAGS ${FLAGS} -Wall -Wextra -Werror -std=gnu++14)
+    set(FLAGS ${FLAGS} -Wall -Wextra -Werror)
 
     if(OPTIMIZE_BUILD)
         set(FLAGS ${FLAGS} -O3)
