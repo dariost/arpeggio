@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0.2)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake-modules/")
 
+include(CheckCXXCompilerFlag)
+
 project(arpeggio)
 
 option(DEBUG "Debug build" ON)
@@ -69,13 +71,21 @@ if(UNIX)
 endif()
 
 if(NOT MSVC)
-set(FLAGS ${FLAGS} -Wall -Wextra -Werror -std=gnu++14)
+    CHECK_CXX_COMPILER_FLAG("-std=gnu++14" COMPILER_SUPPORTS_GNUXX14)
 
-if(OPTIMIZE_BUILD)
-    set(FLAGS ${FLAGS} -O3)
-else()
-    set(FLAGS ${FLAGS} -O0)
-endif()
+    if(COMPILER_SUPPORTS_GNUXX14)
+        set(FLAGS ${FLAGS} -std=gnu++14)
+    else()
+        set(FLAGS ${FLAGS} -std=gnu++1y)
+    endif()
+
+    set(FLAGS ${FLAGS} -Wall -Wextra -Werror -std=gnu++14)
+
+    if(OPTIMIZE_BUILD)
+        set(FLAGS ${FLAGS} -O3)
+    else()
+        set(FLAGS ${FLAGS} -O0)
+    endif()
 endif()
 
 add_executable(arpeggio ${SOURCES})
