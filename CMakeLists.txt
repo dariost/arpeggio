@@ -7,6 +7,8 @@ project(arpeggio)
 option(DEBUG "Debug build" ON)
 option(OPTIMIZE_BUILD "Use compiler optimizations" ON)
 
+message(STATUS "Building on: ${CMAKE_SYSTEM_NAME}")
+
 file(GLOB SOURCES src/*.cpp)
 
 if(DEBUG AND (NOT MSVC))
