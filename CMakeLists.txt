@@ -53,7 +53,7 @@ if(USE_GLEW)
     endif()
 endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Haiku")
-    set(LIBS ${LIBS} network)
+    set(LIBS ${LIBS} network be game)
 endif()
 
 if(USE_GLEW)
