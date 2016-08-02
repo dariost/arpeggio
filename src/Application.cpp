@@ -18,8 +18,8 @@ Application::Application(int argc, char** argv)
     log->log(Logger::Level::DEBUG, "Debug mode activated");
 #endif
     object_manager = make_shared<ObjectManager>(log);
-    global_config = make_shared<Config>(log, "UserConfig");
-    app_config = make_shared<Config>(log, "AppConfig");
+    global_config = make_shared<Config>(log, "config.json");
+    app_config = make_shared<Config>(log, "app.json");
     global_config->parseConfig(object_manager->getObject("config.json", false)->getString());
     app_config->parseConfig(object_manager->getObject("app.json")->getString());
     unsigned int sdl_init_flags = SDL_INIT_EVERYTHING;
