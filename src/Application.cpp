@@ -47,7 +47,15 @@ Application::Application(int argc, char** argv)
                Mix_GetError());
     log->check(TTF_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize font subsystem: ", TTF_GetError());
     log->check(SDLNet_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize net subsystem: ", SDLNet_GetError());
-    unsigned int msaa = global_config->get("msaa", 0U);
+    uint32_t texture_scale_factor = global_config->get("texture_scale_factor", 1U);
+    log->check(texture_scale_factor == 1 || texture_scale_factor == 2 || texture_scale_factor == 4 || texture_scale_factor == 8 ||
+                   texture_scale_factor == 16,
+               true,
+               Logger::Level::CRITICAL,
+               "Invalid Texture Scale Factor value: ",
+               texture_scale_factor);
+    image_manager = make_shared<ImageManager>(log, object_manager, texture_scale_factor);
+    uint32_t msaa = global_config->get("msaa", 0U);
     log->check(msaa == 0 || msaa == 2 || msaa == 4 || msaa == 8 || msaa == 16,
                true,
                Logger::Level::CRITICAL,
@@ -95,42 +103,45 @@ Application::Application(int argc, char** argv)
     SDL_SysWMinfo wminfo;
     SDL_VERSION(&wminfo.version);
     auto wmret = SDL_GetWindowWMInfo(window, &wminfo);
-    log->check(wmret, SDL_TRUE, Logger::Level::CRITICAL, "Unable to get window manager info: ", SDL_GetError());
-    string subsystem;
-    switch(wminfo.subsystem)
+    log->check(wmret, SDL_TRUE, Logger::Level::WARNING, "Unable to get display server info: ", SDL_GetError());
+    if(wmret == SDL_TRUE)
     {
-        case SDL_SYSWM_WINDOWS:
-            subsystem = "Microsoft Windows";
-            break;
-        case SDL_SYSWM_X11:
-            subsystem = "X Window System";
-            break;
-        case SDL_SYSWM_WINRT:
-            subsystem = "WinRT";
-            break;
-        case SDL_SYSWM_DIRECTFB:
-            subsystem = "DirectFB";
-            break;
-        case SDL_SYSWM_COCOA:
-            subsystem = "Apple OS X";
-            break;
-        case SDL_SYSWM_UIKIT:
-            subsystem = "UIKit";
-            break;
-        case SDL_SYSWM_WAYLAND:
-            subsystem = "Wayland";
-            break;
-        case SDL_SYSWM_MIR:
-            subsystem = "Mir";
-            break;
-        case SDL_SYSWM_ANDROID:
-            subsystem = "Android";
-            break;
-        default:
-            subsystem = "Unknown";
-            break;
+        string subsystem;
+        switch(wminfo.subsystem)
+        {
+            case SDL_SYSWM_WINDOWS:
+                subsystem = "Microsoft Windows";
+                break;
+            case SDL_SYSWM_X11:
+                subsystem = "X Window System";
+                break;
+            case SDL_SYSWM_WINRT:
+                subsystem = "WinRT";
+                break;
+            case SDL_SYSWM_DIRECTFB:
+                subsystem = "DirectFB";
+                break;
+            case SDL_SYSWM_COCOA:
+                subsystem = "Apple OS X";
+                break;
+            case SDL_SYSWM_UIKIT:
+                subsystem = "UIKit";
+                break;
+            case SDL_SYSWM_WAYLAND:
+                subsystem = "Wayland";
+                break;
+            case SDL_SYSWM_MIR:
+                subsystem = "Mir";
+                break;
+            case SDL_SYSWM_ANDROID:
+                subsystem = "Android";
+                break;
+            default:
+                subsystem = "Unknown";
+                break;
+        }
+        log->log(Logger::Level::INFO, "Using display server \"", subsystem, "\"");
     }
-    log->log(Logger::Level::INFO, "Using window manager \"", subsystem, "\"");
     glcon = SDL_GL_CreateContext(window);
     log->check(!glcon,
                false,
@@ -154,6 +165,14 @@ Application::Application(int argc, char** argv)
     log->log(Logger::Level::INFO, "GL_SHADING_LANGUAGE_VERSION: ", get_glinfo(GL_SHADING_LANGUAGE_VERSION));
     log->log(Logger::Level::INFO, "GL_VENDOR: ", get_glinfo(GL_VENDOR));
     log->log(Logger::Level::INFO, "GL_RENDERER: ", get_glinfo(GL_RENDERER));
+    GLint max_texture_size;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
+    log->log(Logger::Level::INFO, "GL_MAX_TEXTURE_SIZE: ", max_texture_size);
+    log->check(max_texture_size >= ARPEGGIO_MAX_TEXTURE_SIZE,
+               true,
+               Logger::Level::CRITICAL,
+               "GL_MAX_TEXTURE_SIZE must be at least ",
+               ARPEGGIO_MAX_TEXTURE_SIZE);
 #ifdef ARPEGGIO_DEBUG
     log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "GL_KHR_debug is not supported");
     gldebug_init_functions(log);

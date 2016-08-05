@@ -40,3 +40,5 @@
 
 using namespace std;
 using namespace nlohmann;
+
+#define ARPEGGIO_MAX_TEXTURE_SIZE 4096

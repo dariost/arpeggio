@@ -15,5 +15,6 @@ public:
     size_t getSize();
     void* getData();
     const char* getString();
+    string getName();
     Object(shared_ptr<Logger> logger, const string& file_name, bool encrypted);
 };

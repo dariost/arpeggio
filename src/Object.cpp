@@ -38,3 +38,8 @@ const char* Object::getString()
 {
     return (const char*)data.data();
 }
+
+string Object::getName()
+{
+    return name;
+}
