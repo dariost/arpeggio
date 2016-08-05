@@ -13,7 +13,7 @@ protected:
     unordered_map<string, weak_ptr<Object>> bucket;
 
 public:
-    ObjectManager(shared_ptr<Logger> logger, const string& path = "data/");
+    ObjectManager(shared_ptr<Logger> logger, const string& path);
     shared_ptr<Object> getObject(const string& file_name,
                                  bool encrypted =
 #ifdef ARPEGGIO_DEBUG

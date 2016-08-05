@@ -5,8 +5,6 @@
 
 Application::Application(int argc, char** argv)
 {
-    (void)argc;
-    (void)argv;
     Logger::Level min_verbosity;
 #ifdef ARPEGGIO_DEBUG
     min_verbosity = Logger::Level::DEBUG;
@@ -17,7 +15,15 @@ Application::Application(int argc, char** argv)
 #ifdef ARPEGGIO_DEBUG
     log->log(Logger::Level::DEBUG, "Debug mode activated");
 #endif
-    object_manager = make_shared<ObjectManager>(log);
+    string base_path = "data/";
+    for(uint32_t i = 1; i < (uint32_t)argc; i++)
+    {
+        if((!strcmp(argv[i], "--base-path") || !strcmp(argv[i], "-p")) && i + 1 < (uint32_t)argc)
+        {
+            base_path = argv[i + 1];
+        }
+    }
+    object_manager = make_shared<ObjectManager>(log, base_path);
     global_config = make_shared<Config>(log, "config.json");
     app_config = make_shared<Config>(log, "app.json");
     global_config->parseConfig(object_manager->getObject("config.json", false)->getString());
