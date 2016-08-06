@@ -6,6 +6,7 @@
 #include "ImageManager.hpp"
 #include "Logger.hpp"
 #include "ObjectManager.hpp"
+#include "Timer.hpp"
 
 class Application
 {

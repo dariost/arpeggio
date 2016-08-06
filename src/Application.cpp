@@ -36,8 +36,8 @@ Application::Application(int argc, char** argv)
     sdl_init_flags ^= SDL_INIT_HAPTIC;
 #endif
     log->check(SDL_Init(sdl_init_flags), 0, Logger::Level::CRITICAL, "Unable to initialize system: ", SDL_GetError());
-    log->check(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG,
-               (int)IMG_INIT_PNG,
+    log->check(IMG_Init(IMG_INIT_PNG | IMG_INIT_WEBP) & (IMG_INIT_PNG | IMG_INIT_WEBP),
+               (int)(IMG_INIT_PNG | IMG_INIT_WEBP),
                Logger::Level::CRITICAL,
                "Unable to initialize images subsystem: ",
                IMG_GetError());
@@ -183,6 +183,10 @@ Application::Application(int argc, char** argv)
     log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "GL_KHR_debug is not supported");
     gldebug_init_functions(log);
     glEnable(GL_DEBUG_OUTPUT);
+    GLint max_label_length;
+    glGetIntegerv(GL_MAX_LABEL_LENGTH, &max_label_length);
+    log->log(Logger::Level::INFO, "GL_MAX_LABEL_LENGTH: ", max_label_length);
+    log->check(max_label_length >= 256, true, Logger::Level::CRITICAL, "GL_MAX_LABEL_LENGTH is too low");
 #endif
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

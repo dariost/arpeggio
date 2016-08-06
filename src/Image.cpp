@@ -7,8 +7,12 @@ Image::Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_f
     SDL_RWops* rwops = SDL_RWFromConstMem(obj->getData(), obj->getSize());
     log->check(!rwops, false, Logger::Level::CRITICAL, "Cannot get a pointer to \"", path, "\": ", SDL_GetError());
     SDL_Surface* raw_surf = IMG_Load_RW(rwops, 0);
+    SDL_Surface* surf;
     log->check(!raw_surf, false, Logger::Level::CRITICAL, "Cannot open image \"", path, "\": ", IMG_GetError());
-    SDL_Surface* surf = SDL_ConvertSurfaceFormat(raw_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+    if(raw_surf->format->format == SDL_PIXELFORMAT_RGBA8888)
+        surf = raw_surf;
+    else
+        surf = SDL_ConvertSurfaceFormat(raw_surf, SDL_PIXELFORMAT_RGBA8888, 0);
     log->check(!surf, false, Logger::Level::CRITICAL, "Cannot convert image \"", path, "\": ", SDL_GetError());
     log->check(surf->w <= ARPEGGIO_MAX_TEXTURE_SIZE, true, Logger::Level::CRITICAL, "Image \"", path, "\" width is too large");
     log->check(surf->h <= ARPEGGIO_MAX_TEXTURE_SIZE, true, Logger::Level::CRITICAL, "Image \"", path, "\" height is too large");
@@ -28,7 +32,8 @@ Image::Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_f
     }
     uint32_t current_width = surf->w;
     uint32_t current_height = surf->h;
-    SDL_FreeSurface(surf);
+    if(surf != raw_surf)
+        SDL_FreeSurface(surf);
     SDL_FreeSurface(raw_surf);
     SDL_RWclose(rwops);
     for(uint32_t i = 1; i < scale_factor; i *= 2)
@@ -88,7 +93,7 @@ void Image::activateTexture(bool toggle)
     if((toggle && isTextureActive()) || (!toggle && !isTextureActive()))
         return;
     if(toggle)
-        texture = make_shared<Texture>(log, width, height, data);
+        texture = make_shared<Texture>(log, width, height, data, path);
     else
         texture.reset();
 }
