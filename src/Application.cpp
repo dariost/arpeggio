@@ -184,6 +184,9 @@ Application::Application(int argc, char** argv)
     gldebug_init_functions(log);
     glEnable(GL_DEBUG_OUTPUT);
 #endif
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendEquation(GL_FUNC_ADD);
 }
 
 Application::~Application()
