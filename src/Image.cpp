@@ -77,3 +77,24 @@ string Image::getName()
 {
     return path;
 }
+
+bool Image::isTextureActive()
+{
+    return bool(texture);
+}
+
+void Image::activateTexture(bool toggle)
+{
+    if((toggle && isTextureActive()) || (!toggle && !isTextureActive()))
+        return;
+    if(toggle)
+        texture = make_shared<Texture>(log, width, height, data);
+    else
+        texture.reset();
+}
+
+void Image::bindTexture()
+{
+    log->check(isTextureActive(), true, Logger::Level::CRITICAL, "Trying to bind \"", path, "\" while not in VRAM");
+    texture->bind();
+}
