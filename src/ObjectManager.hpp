@@ -11,6 +11,7 @@ protected:
     shared_ptr<Logger> log;
     string base_path;
     unordered_map<string, weak_ptr<Object>> bucket;
+    mutex mt;
 
 public:
     ObjectManager(shared_ptr<Logger> logger, const string& path);
