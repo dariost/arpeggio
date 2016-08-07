@@ -53,6 +53,12 @@ Application::Application(int argc, char** argv)
                Mix_GetError());
     log->check(TTF_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize font subsystem: ", TTF_GetError());
     log->check(SDLNet_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize net subsystem: ", SDLNet_GetError());
+    auto str_or_null = [](const char* s) -> const char* { return s ? s : "NULL"; };
+    log->log(Logger::Level::INFO, "Platform: ", str_or_null(SDL_GetPlatform()));
+    log->log(Logger::Level::INFO, "SDL_VIDEODRIVER: ", str_or_null(SDL_GetCurrentVideoDriver()));
+    log->log(Logger::Level::INFO, "SDL_AUDIODRIVER: ", str_or_null(SDL_GetCurrentAudioDriver()));
+    log->log(Logger::Level::INFO, "Number of CPU cores: ", SDL_GetCPUCount());
+    log->log(Logger::Level::INFO, "System RAM: ", SDL_GetSystemRAM(), " MiB");
     uint32_t texture_scale_factor = global_config->get("texture_scale_factor", 1U);
     log->check(texture_scale_factor == 1 || texture_scale_factor == 2 || texture_scale_factor == 4 || texture_scale_factor == 8 ||
                    texture_scale_factor == 16,
