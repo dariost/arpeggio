@@ -7,7 +7,6 @@ include(CheckCXXCompilerFlag)
 project(arpeggio)
 
 option(DEBUG "Debug build" ON)
-option(OPTIMIZE_BUILD "Use compiler optimizations" ON)
 
 message(STATUS "Building on: ${CMAKE_SYSTEM_NAME}")
 
@@ -88,6 +87,10 @@ if(UNIX)
     endif()
 endif()
 
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(LIBS ${LIBS} -static-libgcc -static-libstdc++)
+endif()
+
 if(NOT MSVC)
     CHECK_CXX_COMPILER_FLAG("-std=gnu++14" COMPILER_SUPPORTS_GNUXX14)
 
@@ -97,13 +100,7 @@ if(NOT MSVC)
         set(FLAGS ${FLAGS} -std=gnu++1y)
     endif()
 
-    set(FLAGS ${FLAGS} -Wall -Wextra -Werror)
-
-    if(OPTIMIZE_BUILD)
-        set(FLAGS ${FLAGS} -O3)
-    else()
-        set(FLAGS ${FLAGS} -O0)
-    endif()
+    set(FLAGS ${FLAGS} -Wall -Wextra -Werror -O3)
 endif()
 
 add_executable(arpeggio ${SOURCES})

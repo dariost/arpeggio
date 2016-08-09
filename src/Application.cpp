@@ -41,8 +41,8 @@ Application::Application(int argc, char** argv)
                Logger::Level::CRITICAL,
                "Unable to initialize images subsystem: ",
                IMG_GetError());
-    log->check(Mix_Init(MIX_INIT_OGG) & MIX_INIT_OGG,
-               (int)MIX_INIT_OGG,
+    log->check(Mix_Init(MIX_INIT_OGG | MIX_INIT_FLAC) & (MIX_INIT_OGG | MIX_INIT_FLAC),
+               (int)(MIX_INIT_OGG | MIX_INIT_FLAC),
                Logger::Level::CRITICAL,
                "Unable to initialize audio subsystem: ",
                Mix_GetError());

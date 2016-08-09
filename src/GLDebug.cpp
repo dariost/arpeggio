@@ -11,13 +11,13 @@ PFNGLOBJECTPTRLABELPROC fpObjectPtrLabel;
 PFNGLPOPDEBUGGROUPPROC fpPopDebugGroup;
 PFNGLPUSHDEBUGGROUPPROC fpPushDebugGroup;
 
-void gl_callback(GLenum source,
-                 GLenum type,
-                 GLuint id,
-                 GLenum severity,
-                 GLsizei length,
-                 const GLchar* message,
-                 const void* user_param)
+void GLAPIENTRY gl_callback(GLenum source,
+                            GLenum type,
+                            GLuint id,
+                            GLenum severity,
+                            GLsizei length,
+                            const GLchar* message,
+                            const void* user_param)
 {
     (void)length;
     Logger* log = (Logger*)user_param;
