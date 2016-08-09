@@ -118,6 +118,9 @@ endif ()
 
 project(freetype)
 
+if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND CMAKE_COMPILER_IS_GNUCC)
+    set(CMAKE_C_FLAGS "-flto -O3")
+endif()
 
 if (WIN32 AND NOT MINGW AND BUILD_SHARED_LIBS)
   message(FATAL_ERROR "Building shared libraries on Windows needs MinGW")
