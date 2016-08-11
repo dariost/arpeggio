@@ -102,7 +102,7 @@ Application::Application(int argc, char** argv)
     else
     {
         width = global_config->get("width", 800);
-        height = global_config->get("width", 600);
+        height = global_config->get("height", 600);
     }
     log->log(Logger::Level::INFO, "Window size is ", width, "x", height);
     window = SDL_CreateWindow(app_config->get("name", string("Arpeggio")).c_str(),
