@@ -23,10 +23,11 @@ void Shader::attach(shared_ptr<Object> obj)
         if(obj_name[i] == '.')
             break;
     }
+    reverse(ext.begin(), ext.end());
     GLenum type;
-    if(ext == "trev.")
+    if(ext == ".vert")
         type = GL_VERTEX_SHADER;
-    else if(ext == "garf.")
+    else if(ext == ".frag")
         type = GL_FRAGMENT_SHADER;
     else
         log->log(Logger::Level::CRITICAL, "Cannot deduce type fro shader \"", obj->getName(), "\"");
