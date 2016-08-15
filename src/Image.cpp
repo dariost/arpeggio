@@ -9,10 +9,10 @@ Image::Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_f
     SDL_Surface* raw_surf = IMG_Load_RW(rwops, 0);
     SDL_Surface* surf;
     log->check(!raw_surf, false, Logger::Level::CRITICAL, "Cannot open image \"", path, "\": ", IMG_GetError());
-    if(raw_surf->format->format == SDL_PIXELFORMAT_RGBA8888)
+    if(raw_surf->format->format == SDL_PIXELFORMAT_ABGR8888)
         surf = raw_surf;
     else
-        surf = SDL_ConvertSurfaceFormat(raw_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+        surf = SDL_ConvertSurfaceFormat(raw_surf, SDL_PIXELFORMAT_ABGR8888, 0);
     log->check(!surf, false, Logger::Level::CRITICAL, "Cannot convert image \"", path, "\": ", SDL_GetError());
     log->check(surf->w <= ARPEGGIO_MAX_TEXTURE_SIZE, true, Logger::Level::CRITICAL, "Image \"", path, "\" width is too large");
     log->check(surf->h <= ARPEGGIO_MAX_TEXTURE_SIZE, true, Logger::Level::CRITICAL, "Image \"", path, "\" height is too large");

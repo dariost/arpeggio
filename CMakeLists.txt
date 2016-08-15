@@ -7,14 +7,13 @@ include(CheckCXXCompilerFlag)
 project(arpeggio)
 
 option(DEBUG "Debug build" ON)
+if(WIN32 OR (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD") OR (CMAKE_SYSTEM_NAME STREQUAL "Haiku"))
+    option(USE_GLEW "Use OpenGL" ON)
+else()
+    option(USE_GLEW "Use OpenGL" OFF)
+endif()
 
 message(STATUS "Building on: ${CMAKE_SYSTEM_NAME}")
-
-if(WIN32 OR (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD") OR (CMAKE_SYSTEM_NAME STREQUAL "Haiku"))
-    set(USE_GLEW ON)
-else()
-    set(USE_GLEW OFF)
-endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
   set(CMAKE_REQUIRED_INCLUDES "/usr/local/include" "/usr/include")
@@ -81,7 +80,7 @@ endif()
 
 if(UNIX)
     set(LIBS ${LIBS} -Wl,-O1,--sort-common,--as-needed,-z,relro)
-    if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND (NOT DEBUG))
         set(FLAGS ${FLAGS} -flto)
         set(LIBS ${LIBS} -flto)
     endif()

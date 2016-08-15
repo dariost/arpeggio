@@ -20,3 +20,6 @@ public:
     void attach(const char* str, GLenum type, const string& shader_name = "(default)");
     void compile();
 };
+
+extern string default_vertex_shader;
+extern string default_fragment_shader;

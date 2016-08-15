@@ -7,6 +7,7 @@
 #include <GLES3/gl3.h>
 #endif
 
+#include <array>
 #include <cerrno>
 #include <chrono>
 #include <condition_variable>

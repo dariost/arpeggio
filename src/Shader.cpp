@@ -1,10 +1,16 @@
 #include "Shader.hpp"
 
+#include "GLDebug.hpp"
+
 Shader::Shader(shared_ptr<Logger> logger)
 {
     log = logger;
     is_built = false;
     program = glCreateProgram();
+#ifdef ARPEGGIO_DEBUG
+    string program_name = "\"Linked Shader\"";
+    fpObjectLabel(GL_PROGRAM, program, program_name.size(), program_name.data());
+#endif
 }
 
 void Shader::use()
@@ -24,20 +30,33 @@ void Shader::attach(shared_ptr<Object> obj)
             break;
     }
     reverse(ext.begin(), ext.end());
-    GLenum type;
+    GLenum type = 0;
     if(ext == ".vert")
         type = GL_VERTEX_SHADER;
     else if(ext == ".frag")
         type = GL_FRAGMENT_SHADER;
     else
-        log->log(Logger::Level::CRITICAL, "Cannot deduce type fro shader \"", obj->getName(), "\"");
+        log->log(Logger::Level::CRITICAL, "Cannot deduce type from shader \"", obj->getName(), "\"");
     attach(obj->getString(), type, obj->getName());
 }
 
 void Shader::attach(const char* str, GLenum type, const string& shader_name)
 {
     GLuint shdr = glCreateShader(type);
-    glShaderSource(shdr, 1, &str, nullptr);
+#ifdef ARPEGGIO_DEBUG
+    string shader_name_debug = "\"" + shader_name + "\"";
+    fpObjectLabel(GL_SHADER, shdr, shader_name_debug.size(), shader_name_debug.data());
+#endif
+    string true_shader;
+#ifdef ARPEGGIO_GLES
+    true_shader += "#version 300 es\n";
+    true_shader += "precision mediump float;\n";
+#else
+    true_shader += "#version 330 core\n";
+#endif
+    true_shader += str;
+    const char* s = (const char*)true_shader.data();
+    glShaderSource(shdr, 1, &s, nullptr);
     glCompileShader(shdr);
     GLint status;
     glGetShaderiv(shdr, GL_COMPILE_STATUS, &status);
@@ -84,3 +103,28 @@ Shader::~Shader()
         glDeleteShader(i);
     }
 }
+
+string default_vertex_shader = R"delim(
+layout (location = 0) in vec2 pos;
+layout (location = 1) in vec2 texPos;
+
+out vec2 texCoord;
+
+void main()
+{
+    gl_Position = vec4(pos, 0.0, 1.0);
+    texCoord = texPos;
+}
+)delim";
+string default_fragment_shader = R"delim(
+in vec2 texCoord;
+
+out vec4 color;
+
+uniform sampler2D uniformTexture;
+
+void main()
+{
+    color = texture(uniformTexture, texCoord);
+}
+)delim";

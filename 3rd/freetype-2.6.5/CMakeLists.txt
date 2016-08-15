@@ -119,7 +119,11 @@ endif ()
 project(freetype)
 
 if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND CMAKE_COMPILER_IS_GNUCC)
-    set(CMAKE_C_FLAGS "-flto -O3")
+    if(DEBUG)
+        set(CMAKE_C_FLAGS "-O3")
+    else()
+        set(CMAKE_C_FLAGS "-flto -O3")
+    endif()
 endif()
 
 if (WIN32 AND NOT MINGW AND BUILD_SHARED_LIBS)

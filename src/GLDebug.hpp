@@ -48,6 +48,10 @@
 #define GL_DEBUG_SEVERITY_LOW 0x9148
 #define GL_DEBUG_OUTPUT 0x92E0
 
+#ifndef GL_VERTEX_ARRAY
+#define GL_VERTEX_ARRAY 0x8074
+#endif
+
 #ifndef GLAPIENTRY
 #define GLAPIENTRY GL_APIENTRY
 #endif
