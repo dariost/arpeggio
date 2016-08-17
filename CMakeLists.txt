@@ -100,6 +100,10 @@ if(NOT MSVC)
     endif()
 
     set(FLAGS ${FLAGS} -Wall -Wextra -Werror -O3)
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        set(FLAGS ${FLAGS} -Wno-missing-braces)
+    endif()
 endif()
 
 add_executable(arpeggio ${SOURCES})
