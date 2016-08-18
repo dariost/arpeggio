@@ -118,13 +118,19 @@ endif ()
 
 project(freetype)
 
+
+### START CUSTOM
 if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND CMAKE_COMPILER_IS_GNUCC)
     if(DEBUG)
         set(CMAKE_C_FLAGS "-O3")
     else()
-        set(CMAKE_C_FLAGS "-flto -O3")
+        set(CMAKE_C_FLAGS -flto -O3)
     endif()
 endif()
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+    set(CMAKE_C_FLAGS /D_CRT_NONSTDC_NO_WARNINGS /D_CRT_SECURE_NO_WARNINGS /D_CRT_SECURE_NO_WARNINGS_GLOBALS)
+endif()
+### END CUSTOM
 
 if (WIN32 AND NOT MINGW AND BUILD_SHARED_LIBS)
   message(FATAL_ERROR "Building shared libraries on Windows needs MinGW")

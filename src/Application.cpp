@@ -52,7 +52,6 @@ Application::Application(int argc, char** argv)
                "Unable to open the audio device: ",
                Mix_GetError());
     log->check(TTF_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize font subsystem: ", TTF_GetError());
-    log->check(SDLNet_Init(), 0, Logger::Level::CRITICAL, "Unable to initialize net subsystem: ", SDLNet_GetError());
     auto str_or_null = [](const char* s) -> const char* { return s ? s : "NULL"; };
     log->log(Logger::Level::INFO, "Platform: ", str_or_null(SDL_GetPlatform()));
     log->log(Logger::Level::INFO, "SDL_VIDEODRIVER: ", str_or_null(SDL_GetCurrentVideoDriver()));
@@ -203,7 +202,6 @@ Application::~Application()
 {
     SDL_GL_DeleteContext(glcon);
     SDL_DestroyWindow(window);
-    SDLNet_Quit();
     TTF_Quit();
     Mix_CloseAudio();
     Mix_Quit();

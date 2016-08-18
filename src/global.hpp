@@ -27,8 +27,6 @@
 #include <vector>
 
 #ifdef _WIN32
-#include <winsock2.h>
-
 #include <io.h>
 #include <windows.h>
 #undef ERROR
@@ -39,7 +37,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include <SDL_net.h>
 #include <SDL_ttf.h>
 #include <json.hpp>
 
