@@ -104,6 +104,10 @@ if(NOT MSVC)
     endif()
 endif()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+    set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
+endif()
+
 add_executable(arpeggio ${SOURCES})
 
 target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
