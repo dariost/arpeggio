@@ -6,6 +6,10 @@ include(CheckCXXCompilerFlag)
 
 project(arpeggio)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+    file(COPY ${CMAKE_SOURCE_DIR}/3rd/SDL2-2.0.4 DESTINATION ${CMAKE_BINARY_DIR})
+endif()
+
 option(DEBUG "Debug build" ON)
 if(WIN32 OR (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD") OR (CMAKE_SYSTEM_NAME STREQUAL "Haiku"))
     option(USE_GLEW "Use OpenGL" ON)
@@ -36,9 +40,7 @@ add_subdirectory(3rd)
 if(USE_GLEW)
     set(LIBS ${LIBS} glew)
 endif()
-if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
-    set(LIBS ${LIBS} SDL2)
-else()
+if(NOT (CMAKE_SYSTEM_NAME STREQUAL "WindowsStore"))
     set(LIBS ${LIBS} SDL2-static SDL2main)
 endif()
 set(LIBS ${LIBS} SDL2_image)
@@ -106,10 +108,6 @@ if(NOT MSVC)
     endif()
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
-    set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
-endif()
-
 add_executable(arpeggio ${SOURCES})
 
 target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
@@ -117,6 +115,11 @@ target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
 target_link_libraries(arpeggio PRIVATE ${LIBS})
 
 target_compile_options(arpeggio PRIVATE ${FLAGS})
+
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+	add_dependencies(arpeggio SDL-UWP)
+	set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
+endif()
 
 if(DEBUG)
     set(DEFS ${DEFS} ARPEGGIO_DEBUG)
