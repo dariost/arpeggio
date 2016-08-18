@@ -11,7 +11,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 endif()
 
 option(DEBUG "Debug build" ON)
-if(WIN32 OR (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD") OR (CMAKE_SYSTEM_NAME STREQUAL "Haiku"))
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+	option(USE_GLEW "Use OpenGL" OFF)
+elseif(WIN32 OR (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD") OR (CMAKE_SYSTEM_NAME STREQUAL "Haiku"))
     option(USE_GLEW "Use OpenGL" ON)
 else()
     option(USE_GLEW "Use OpenGL" OFF)
@@ -23,7 +25,15 @@ if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
   set(CMAKE_REQUIRED_INCLUDES "/usr/local/include" "/usr/include")
 endif()
 
-file(GLOB SOURCES src/*.cpp)
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+	if(NOT DEBUG)
+		file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/3rd/SDL2-2.0.4/src/main/winrt/*)
+	else()
+		file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/3rd/SDL2-2.0.4/src/main/winrt/SDL2-WinRTResources.rc ${CMAKE_SOURCE_DIR}/3rd/SDL2-2.0.4/src/main/winrt/SDL2-WinRTResource_BlankCursor.cur)
+	endif()
+else()
+	file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+endif()
 
 if(DEBUG AND (NOT MSVC))
     set(LIBS ${LIBS} -g)
@@ -110,16 +120,21 @@ endif()
 
 add_executable(arpeggio ${SOURCES})
 
+if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
+	add_dependencies(arpeggio SDL-UWP)
+	set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
+	set(FLAGS ${FLAGS} /ZW)
+	if(NOT DEBUG)
+		set_target_properties(arpeggio PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+		set_target_properties(arpeggio PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
+	endif()
+endif()
+
 target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
 
 target_link_libraries(arpeggio PRIVATE ${LIBS})
 
 target_compile_options(arpeggio PRIVATE ${FLAGS})
-
-if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
-	add_dependencies(arpeggio SDL-UWP)
-	set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
-endif()
 
 if(DEBUG)
     set(DEFS ${DEFS} ARPEGGIO_DEBUG)
@@ -129,7 +144,7 @@ if((NOT USE_GLEW) OR EMSCRIPTEN)
     set(DEFS ${DEFS} ARPEGGIO_GLES)
 endif()
 
-if(MINGW)
+if(MINGW OR ((CMAKE_SYSTEM_NAME STREQUAL "WindowsStore") AND DEBUG))
     set(DEFS ${DEFS} SDL_MAIN_HANDLED)
 endif()
 
