@@ -41,6 +41,8 @@ if(DEBUG AND (NOT MSVC))
     set(FLAGS ${FLAGS} -g)
 endif()
 
+add_subdirectory(3rd)
+
 if(NOT (USE_GLEW OR EMSCRIPTEN))
 	if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 		set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${angle_INCLUDES})
@@ -49,8 +51,6 @@ if(NOT (USE_GLEW OR EMSCRIPTEN))
 		set(LIBS ${LIBS} ${GLES_LIBRARIES})
 	endif()
 endif()
-
-add_subdirectory(3rd)
 
 if(USE_GLEW)
     set(LIBS ${LIBS} glew)
@@ -127,7 +127,7 @@ add_executable(arpeggio ${SOURCES})
 
 if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 	add_dependencies(arpeggio SDL-UWP angle_common angle_image_util commit_id copy_compiler_dll copy_scripts libANGLE libEGL libGLESv2 preprocessor translator translator_lib translator_static)
-	set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS)
+	set(DEFS ${DEFS} _CRT_NONSTDC_NO_WARNINGS _CRT_SECURE_NO_WARNINGS _CRT_SECURE_NO_WARNINGS_GLOBALS GL_GLEXT_PROTOTYPES)
 	set(FLAGS ${FLAGS} /ZW)
 	if(NOT DEBUG)
 		set_target_properties(arpeggio PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
