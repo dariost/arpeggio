@@ -82,7 +82,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;_DEBUG;ANGLE_ENABLE_DEBUG_ANNOTATIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Lib>
@@ -100,7 +100,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -124,7 +124,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;_DEBUG;ANGLE_ENABLE_DEBUG_ANNOTATIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Lib>
@@ -142,7 +142,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -166,7 +166,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;_DEBUG;ANGLE_ENABLE_DEBUG_ANNOTATIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Lib>
@@ -184,7 +184,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -208,7 +208,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
@@ -226,7 +226,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -250,7 +250,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
@@ -268,7 +268,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -292,7 +292,7 @@
       <PreprocessorDefinitions>ANGLE_DEQP_GLES2_TESTS;ANGLE_DEQP_LIBTESTER_IMPLEMENTATION;DEQP_SUPPORT_GLES31=1;DEQP_SUPPORT_GLES3=1;DEQP_SUPPORT_GLES2=1;DEQP_SUPPORT_EGL=1;DEQP_TARGET_NAME=&quot;angle&quot;;DEQP_GLES31_RUNTIME_LOAD=1;DEQP_GLES3_RUNTIME_LOAD=1;DEQP_GLES2_RUNTIME_LOAD=1;QP_SUPPORT_PNG=1;_HAS_EXCEPTIONS=1;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
       <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
@@ -310,7 +310,7 @@
       <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(OutDir)obj\global_intermediate\angle;..\..\..\..\include;..\..\..\..\third_party\deqp\src\executor;..\..\..\..\third_party\deqp\src\execserver;..\..\..\..\third_party\deqp\src\framework\common;..\..\..\..\third_party\deqp\src\framework\delibs\debase;..\..\..\..\third_party\deqp\src\framework\delibs\decpp;..\..\..\..\third_party\deqp\src\framework\delibs\depool;..\..\..\..\third_party\deqp\src\framework\delibs\dethread;..\..\..\..\third_party\deqp\src\framework\delibs\deutil;..\..\..\..\third_party\deqp\src\framework\delibs\destream;..\..\..\..\third_party\deqp\src\framework\egl;..\..\..\..\third_party\deqp\src\framework\egl\wrapper;..\..\..\..\third_party\deqp\src\framework\opengl;..\..\..\..\third_party\deqp\src\framework\opengl\simplereference;..\..\..\..\third_party\deqp\src\framework\opengl\wrapper;..\..\..\..\third_party\deqp\src\framework\platform\null;..\..\..\..\third_party\deqp\src\framework\qphelper;..\..\..\..\third_party\deqp\src\framework\randomshaders;..\..\..\..\third_party\deqp\src\framework\referencerenderer;..\..\..\..\third_party\deqp\src\modules\gles2;..\..\..\..\third_party\deqp\src\modules\gles2\functional;..\..\..\..\third_party\deqp\src\modules\gles2\accuracy;..\..\..\..\third_party\deqp\src\modules\gles2\performance;..\..\..\..\third_party\deqp\src\modules\gles2\stress;..\..\..\..\third_party\deqp\src\modules\gles2\usecases;..\..\..\..\third_party\deqp\src\modules\gles3;..\..\..\..\third_party\deqp\src\modules\gles3\functional;..\..\..\..\third_party\deqp\src\modules\gles3\accuracy;..\..\..\..\third_party\deqp\src\modules\gles3\performance;..\..\..\..\third_party\deqp\src\modules\gles3\stress;..\..\..\..\third_party\deqp\src\modules\gles3\usecases;..\..\..\..\third_party\deqp\src\modules\gles31;..\..\..\..\third_party\deqp\src\modules\gles31\functional;..\..\..\..\third_party\deqp\src\modules\gles31\stress;..\..\..\..\third_party\deqp\src\modules\glshared;..\..\..\..\third_party\deqp\src\modules\glusecases;..\..\..\..\third_party\libpng;..\..\..\..\third_party\zlib;..\..\..\..\third_party\deqp\src\framework\platform\win32;..\..\..\..\util;..\..\..\..\src;..\..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
