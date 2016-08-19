@@ -103,6 +103,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -146,6 +147,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -189,6 +191,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -232,6 +235,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -275,6 +279,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -318,6 +323,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\third_party\khronos;$(OutDir)obj\global_intermediate\angle;..\..\..\src;..\..\..\src\common\third_party\numerics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

@@ -102,6 +102,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -145,6 +146,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -188,6 +190,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -231,6 +234,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -274,6 +278,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -317,6 +322,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
+<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\..\..\src;..\..\..\include;..\..\..\src\common\third_party\numerics;$(OutDir)obj\global_intermediate\angle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
