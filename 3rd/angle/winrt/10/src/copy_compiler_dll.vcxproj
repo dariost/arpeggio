@@ -101,7 +101,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -143,7 +143,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -185,7 +185,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -227,7 +227,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -269,7 +269,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineARM</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -311,7 +311,7 @@
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
       <TreatLinkerWarningAsErrors>false</TreatLinkerWarningAsErrors>
-<GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+<GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
