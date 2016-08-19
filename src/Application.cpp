@@ -209,8 +209,35 @@ Application::~Application()
     SDL_Quit();
 }
 
+#include "Animation.hpp"
+#include "Shader.hpp"
+
 int Application::run()
 {
     // TODO: do something
+    auto shdr = make_shared<Shader>(log);
+    shdr->attach(default_vertex_shader.c_str(), GL_VERTEX_SHADER);
+    shdr->attach(default_fragment_shader.c_str(), GL_FRAGMENT_SHADER);
+    shdr->compile();
+    shdr->use();
+    vector<shared_ptr<Image>> v;
+    v.push_back(image_manager->getImage("image.png"));
+    v.front()->activateTexture();
+    auto anim = make_shared<Animation>(log, "test");
+    anim->setFrames(v);
+    bool quit = false;
+    SDL_Event e;
+    while(!quit)
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        anim->draw();
+        glFlush();
+        SDL_GL_SwapWindow(window);
+        while((SDL_PollEvent(&e)))
+        {
+            if(e.type == SDL_QUIT)
+                quit = true;
+        }
+    }
     return EXIT_SUCCESS;
 }

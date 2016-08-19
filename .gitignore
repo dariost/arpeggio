@@ -1,5 +1,6 @@
 test
 bin
 build
+data
 *.o
 *.obj
