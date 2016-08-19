@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\winrt">
+      <UniqueIdentifier>{8C13C927-D4CA-F91A-E2C8-EF73D673852B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\winrt">
+      <UniqueIdentifier>{8C13C927-D4CA-F91A-E2C8-EF73D673852B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\winrt">
+      <UniqueIdentifier>{8C13C927-D4CA-F91A-E2C8-EF73D673852B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\winrt">
+      <UniqueIdentifier>{8C13C927-D4CA-F91A-E2C8-EF73D673852B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{C1450D01-C033-76F3-3763-6DE88AF48A77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\util\com_utils.h"/>
+    <ClInclude Include="..\..\..\util\keyboard.h"/>
+    <ClCompile Include="..\..\..\util\geometry_utils.cpp"/>
+    <ClInclude Include="..\..\..\util\geometry_utils.h"/>
+    <ClInclude Include="..\..\..\util\mouse.h"/>
+    <ClCompile Include="..\..\..\util\random_utils.cpp"/>
+    <ClInclude Include="..\..\..\util\random_utils.h"/>
+    <ClCompile Include="..\..\..\util\shader_utils.cpp"/>
+    <ClInclude Include="..\..\..\util\shader_utils.h"/>
+    <ClInclude Include="..\..\..\util\system_utils.h"/>
+    <ClInclude Include="..\..\..\util\Event.h"/>
+    <ClCompile Include="..\..\..\util\EGLWindow.cpp"/>
+    <ClInclude Include="..\..\..\util\EGLWindow.h"/>
+    <ClCompile Include="..\..\..\util\Matrix.cpp"/>
+    <ClInclude Include="..\..\..\util\Matrix.h"/>
+    <ClInclude Include="..\..\..\util\OSPixmap.h"/>
+    <ClCompile Include="..\..\..\util\OSWindow.cpp"/>
+    <ClInclude Include="..\..\..\util\OSWindow.h"/>
+    <ClInclude Include="..\..\..\util\Timer.h"/>
+    <ClCompile Include="..\..\..\util\Vector.cpp"/>
+    <ClInclude Include="..\..\..\util\Vector.h"/>
+    <ClCompile Include="..\..\..\util\windows\winrt\WinRT_system_utils.cpp">
+      <Filter>windows\winrt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\util\windows\winrt\WinRTPixmap.cpp">
+      <Filter>windows\winrt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\util\windows\winrt\WinRTWindow.cpp">
+      <Filter>windows\winrt</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\..\util\windows\winrt\WinRTWindow.h">
+      <Filter>windows\winrt</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\util\windows\Windows_system_utils.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\util\windows\WindowsTimer.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\..\util\windows\WindowsTimer.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <None Include="..\..\..\util\util.gyp"/>
+  </ItemGroup>
+</Project>

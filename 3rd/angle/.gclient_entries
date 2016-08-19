@@ -1,0 +1,14 @@
+entries = {
+  '.': 'https://chromium.googlesource.com/angle/angle.git',
+  'buildtools': 'https://chromium.googlesource.com/chromium/buildtools.git@06e80a0e17319868d4a9b13f9bb6a248dc8d8b20',
+  'src/tests/third_party/googlemock': 'https://chromium.googlesource.com/external/googlemock.git@b2cb211e49d872101d991201362d7b97d7d69910',
+  'src/tests/third_party/googletest': 'https://chromium.googlesource.com/external/googletest.git@9855a87157778d39b95eccfb201a9dc90f6d61c6',
+  'third_party/cherry': 'https://android.googlesource.com/platform/external/cherry@d2e26b4d864ec2a6757e7f1174e464949ca5bf73',
+  'third_party/deqp/src': 'https://android.googlesource.com/platform/external/deqp@f4f3d8079e7a37d7675ab93583e6438d0bca0e58',
+  'third_party/gyp': 'https://chromium.googlesource.com/external/gyp@81c2e5ff92af29bab61c982808076ddce3d200a2',
+  'third_party/libpng': 'https://android.googlesource.com/platform/external/libpng@094e181e79a3d6c23fd005679025058b7df1ad6c',
+  'third_party/zlib': 'https://chromium.googlesource.com/chromium/src/third_party/zlib@afd8c4593c010c045902f6c0501718f1823064a3',
+  'buildtools\\clang_format\\script': 'https://chromium.googlesource.com/chromium/llvm-project/cfe/tools/clang-format.git@a72164df8be7d1c68ae1ad6c3541e7819200327e',
+  'buildtools\\third_party\\libc++\\trunk': 'https://chromium.googlesource.com/chromium/llvm-project/libcxx.git@aad34a13af010898f54c1bb2069194cb083cea4b',
+  'buildtools\\third_party\\libc++abi\\trunk': 'https://chromium.googlesource.com/chromium/llvm-project/libcxxabi.git@9a39e428d018b723d7d187181fd08908b1cb6bd0',
+}
