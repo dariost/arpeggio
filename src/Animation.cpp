@@ -12,7 +12,7 @@ Animation::Animation(shared_ptr<Logger> logger, const string& anim_name)
     glGenBuffers(1, &vbo);
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     string debug_name = "\"" + name + "\"";
     fpObjectLabel(GL_VERTEX_ARRAY, vao, debug_name.size(), debug_name.data());
     fpObjectLabel(GL_BUFFER, vbo, debug_name.size(), debug_name.data());

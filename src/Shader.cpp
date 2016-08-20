@@ -7,7 +7,7 @@ Shader::Shader(shared_ptr<Logger> logger)
     log = logger;
     is_built = false;
     program = glCreateProgram();
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     string program_name = "\"Linked Shader\"";
     fpObjectLabel(GL_PROGRAM, program, program_name.size(), program_name.data());
 #endif
@@ -43,7 +43,7 @@ void Shader::attach(shared_ptr<Object> obj)
 void Shader::attach(const char* str, GLenum type, const string& shader_name)
 {
     GLuint shdr = glCreateShader(type);
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     string shader_name_debug = "\"" + shader_name + "\"";
     fpObjectLabel(GL_SHADER, shdr, shader_name_debug.size(), shader_name_debug.data());
 #endif

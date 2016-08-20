@@ -5,6 +5,10 @@
 
 Application::Application(int argc, char** argv)
 {
+#ifdef UWP
+    string log_output = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER) + "/arpeggio_stdout.txt";
+    freopen(log_output.c_str(), "w", stdout);
+#endif
     Logger::Level min_verbosity;
 #ifdef ARPEGGIO_DEBUG
     min_verbosity = Logger::Level::DEBUG;
@@ -23,6 +27,9 @@ Application::Application(int argc, char** argv)
             base_path = argv[i + 1];
         }
     }
+#ifdef UWP
+    base_path = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER) + "/";
+#endif
     object_manager = make_shared<ObjectManager>(log, base_path);
     global_config = make_shared<Config>(log, "config.json");
     app_config = make_shared<Config>(log, "app.json");
@@ -86,7 +93,7 @@ Application::Application(int argc, char** argv)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 #endif
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 #endif
     bool fullscreen = global_config->get("fullscreen", true);
@@ -184,7 +191,7 @@ Application::Application(int argc, char** argv)
                Logger::Level::CRITICAL,
                "GL_MAX_TEXTURE_SIZE must be at least ",
                ARPEGGIO_MAX_TEXTURE_SIZE);
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     log->check(SDL_GL_ExtensionSupported("GL_KHR_debug"), SDL_TRUE, Logger::Level::CRITICAL, "GL_KHR_debug is not supported");
     gldebug_init_functions(log);
     glEnable(GL_DEBUG_OUTPUT);

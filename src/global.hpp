@@ -44,3 +44,9 @@ using namespace std;
 using namespace nlohmann;
 
 #define ARPEGGIO_MAX_TEXTURE_SIZE 4096
+
+#ifdef ARPEGGIO_DEBUG
+#ifndef UWP
+#define USE_GLDEBUG
+#endif
+#endif

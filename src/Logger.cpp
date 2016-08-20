@@ -35,7 +35,9 @@ void Logger::print(Level level, const string& message)
 Logger::Logger(Level min_verbosity)
 {
     verbosity_level = min_verbosity;
-#ifdef _WIN32
+#ifdef UWP
+    is_tty = false;
+#elif defined(_WIN32)
     is_tty = _isatty(_fileno(stdout));
 #else
     is_tty = isatty(fileno(stdout));

@@ -7,7 +7,7 @@ Texture::Texture(shared_ptr<Logger> logger, uint32_t width, uint32_t height, con
     path = name;
     glGenTextures(1, &texture_id);
     glBindTexture(GL_TEXTURE_2D, texture_id);
-#ifdef ARPEGGIO_DEBUG
+#ifdef USE_GLDEBUG
     string path_debug = "\"" + path + "\"";
     log->check(path_debug.size() <= 256, true, Logger::Level::CRITICAL, "File path \"", path, "\" is too long");
     fpObjectLabel(GL_TEXTURE, texture_id, path_debug.size(), path_debug.data());
