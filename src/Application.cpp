@@ -6,7 +6,7 @@
 Application::Application(int argc, char** argv)
 {
 #ifdef UWP
-    string log_output = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER) + "/arpeggio_stdout.txt";
+    string log_output = string(SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER)) + "/arpeggio_stdout.txt";
     freopen(log_output.c_str(), "w", stdout);
 #endif
     Logger::Level min_verbosity;
@@ -28,7 +28,7 @@ Application::Application(int argc, char** argv)
         }
     }
 #ifdef UWP
-    base_path = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER) + "/";
+    base_path = string(SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER)) + "/";
 #endif
     object_manager = make_shared<ObjectManager>(log, base_path);
     global_config = make_shared<Config>(log, "config.json");
