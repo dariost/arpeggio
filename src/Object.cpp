@@ -1,9 +1,10 @@
 #include "Object.hpp"
 
-Object::Object(shared_ptr<Logger> logger, const string& file_name, bool encrypted)
+Object::Object(shared_ptr<Logger> logger, const string& file_name, const string& rn, bool encrypted)
 {
     log = logger;
     name = file_name;
+    relative_name = rn;
     (void)encrypted;
     log->check(encrypted, false, Logger::Level::CRITICAL, "File encryption is not implemented yet");
     errno = 0;
@@ -39,4 +40,9 @@ const char* Object::getString()
 string Object::getName()
 {
     return name;
+}
+
+string Object::getRelativeName()
+{
+    return relative_name;
 }

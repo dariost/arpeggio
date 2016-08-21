@@ -1,9 +1,17 @@
 #include "Config.hpp"
 
-Config::Config(shared_ptr<Logger> logger, const string& debug_name)
+Config::Config(shared_ptr<Logger> logger, const string& debug_name, const string& rn)
 {
     log = logger;
     name = debug_name;
+    relative_name = rn;
+}
+
+void Config::parseConfig(shared_ptr<Object> config)
+{
+    name = config->getName();
+    relative_name = config->getRelativeName();
+    parseConfig(config->getString());
 }
 
 void Config::parseConfig(const string& config)
@@ -21,4 +29,9 @@ void Config::parseConfig(const string& config)
 string Config::getConfig()
 {
     return internal.dump(4);
+}
+
+string Config::getRelativeName()
+{
+    return relative_name;
 }

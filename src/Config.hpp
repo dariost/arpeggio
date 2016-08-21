@@ -3,17 +3,21 @@
 #include "global.hpp"
 
 #include "Logger.hpp"
+#include "Object.hpp"
 
 class Config
 {
 protected:
     shared_ptr<Logger> log;
     string name;
+    string relative_name;
     json internal;
 
 public:
-    Config(shared_ptr<Logger> logger, const string& debug_name = "(default)");
+    Config(shared_ptr<Logger> logger, const string& debug_name = "(default)", const string& rn = "NULL");
+    string getRelativeName();
     void parseConfig(const string& config);
+    void parseConfig(shared_ptr<Object> config);
     string getConfig();
     template <typename T>
     T get(const string& obj_name, const T& default_value = T())

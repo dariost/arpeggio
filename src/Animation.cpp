@@ -2,6 +2,62 @@
 
 #include "GLDebug.hpp"
 
+Animation::Animation(shared_ptr<Logger> logger, shared_ptr<Config> desc, shared_ptr<ImageManager> image_manager)
+{
+    Animation(logger, desc->get<string>("name", "NULL"));
+    setFPS(desc->get("fps", 1.0));
+    auto num_frames = desc->get("num_frames", 1UL);
+    string frames = desc->get<string>("frames", "image.png");
+    string tmp = desc->getRelativeName();
+    while(tmp.back() != '/' && tmp.back() != '\\')
+    {
+        tmp.pop_back();
+    }
+    frames = tmp + frames;
+    uint32_t num_cores = image_manager->getNumCores();
+    vector<string> frame_names;
+    char* buffer = (char*)malloc(2 << 16);
+    log->check(!buffer, false, Logger::Level::CRITICAL, "Out of memory while creating animation \"", name, "\"");
+    for(unsigned int i = 0; i < num_frames; i++)
+    {
+        memset(buffer, 0, 2 << 16);
+#ifdef _MSC_VER
+        sprintf(buffer, frames.c_str(), i);
+#else
+        snprintf(buffer, 2 << 16, frames.c_str(), i);
+#endif
+        frame_names.emplace_back(buffer);
+    }
+    free(buffer);
+    reverse(frame_names.begin(), frame_names.end());
+    vector<shared_ptr<Image>> image_data;
+    vector<pair<future<shared_ptr<Image>>, size_t>> futures;
+    while(image_data.size() < num_frames)
+    {
+        while(futures.size() < num_cores && frame_names.size())
+        {
+            futures.push_back(make_pair(async(launch::async,
+                                              [](shared_ptr<ImageManager> im, string ss) -> auto { return im->getImage(ss); },
+                                              image_manager,
+                                              frame_names.back()),
+                                        num_frames - frame_names.size()));
+            frame_names.pop_back();
+        }
+        for(int i = 0; i < (int)futures.size(); i++)
+        {
+            auto status = futures[i].first.wait_for(chrono::microseconds(1));
+            if(status == future_status::ready)
+            {
+                image_data[futures[i].second] = futures[i].first.get();
+                swap(futures[i], futures.back());
+                futures.pop_back();
+                i--;
+            }
+        }
+    }
+    setFrames(image_data);
+}
+
 Animation::Animation(shared_ptr<Logger> logger, const string& anim_name)
 {
     log = logger;
@@ -85,4 +141,12 @@ size_t Animation::getActualFrameNumber()
 {
     log->check(frame.size() > 0, true, Logger::Level::CRITICAL, "Trying to use empty animation \"", name, "\"");
     return size_t(timer.getTime() / (1.0 / fps)) % frame.size();
+}
+
+void Animation::activateTextures(bool toggle)
+{
+    for(auto& i : frame)
+    {
+        i->activateTexture(toggle);
+    }
 }

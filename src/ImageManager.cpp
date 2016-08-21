@@ -1,10 +1,19 @@
 #include "ImageManager.hpp"
 
-ImageManager::ImageManager(shared_ptr<Logger> _log, shared_ptr<ObjectManager> _obj_manager, uint64_t _scale_factor)
+ImageManager::ImageManager(shared_ptr<Logger> _log,
+                           shared_ptr<ObjectManager> _obj_manager,
+                           uint64_t _scale_factor,
+                           uint32_t _num_cores)
 {
     log = _log;
     obj_manager = _obj_manager;
     scale_factor = _scale_factor;
+    num_cores = _num_cores;
+}
+
+uint32_t ImageManager::getNumCores()
+{
+    return num_cores;
 }
 
 shared_ptr<Image> ImageManager::getImage(const string& path)

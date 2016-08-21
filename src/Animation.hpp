@@ -2,11 +2,14 @@
 
 #include "global.hpp"
 
+#include "Config.hpp"
+#include "Drawable.hpp"
 #include "Image.hpp"
+#include "ImageManager.hpp"
 #include "Logger.hpp"
 #include "Timer.hpp"
 
-class Animation
+class Animation : public Drawable
 {
 protected:
     shared_ptr<Logger> log;
@@ -21,10 +24,12 @@ protected:
 
 public:
     Animation(shared_ptr<Logger> logger, const string& anim_name);
+    Animation(shared_ptr<Logger> logger, shared_ptr<Config> desc, shared_ptr<ImageManager> image_manager);
     ~Animation();
     void setFrames(const vector<shared_ptr<Image>>& v);
     void setFPS(double f);
     void updateData(const array<GLfloat, 16>& d);
     array<GLfloat, 16> getData();
     void draw();
+    void activateTextures(bool toggle = true);
 };

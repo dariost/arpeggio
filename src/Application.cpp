@@ -72,7 +72,7 @@ Application::Application(int argc, char** argv)
                Logger::Level::CRITICAL,
                "Invalid Texture Scale Factor value: ",
                texture_scale_factor);
-    image_manager = make_shared<ImageManager>(log, object_manager, texture_scale_factor);
+    image_manager = make_shared<ImageManager>(log, object_manager, texture_scale_factor, max(uint32_t(SDL_GetCPUCount()), 1U));
     uint32_t msaa = global_config->get("msaa", 0U);
     log->check(msaa == 0 || msaa == 2 || msaa == 4 || msaa == 8 || msaa == 16,
                true,

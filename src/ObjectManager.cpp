@@ -12,7 +12,7 @@ shared_ptr<Object> ObjectManager::getObject(const string& file_name, bool encryp
     string path = base_path + file_name;
     if(bucket.count(path) && !bucket[path].expired())
         return bucket[path].lock();
-    auto obj = make_shared<Object>(log, path, encrypted);
+    auto obj = make_shared<Object>(log, path, file_name, encrypted);
     bucket[path] = obj;
     return obj;
 }
