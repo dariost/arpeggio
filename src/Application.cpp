@@ -203,6 +203,23 @@ Application::Application(int argc, char** argv)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBlendEquation(GL_FUNC_ADD);
+    int real_width, real_height;
+    SDL_GL_GetDrawableSize(window, &real_width, &real_height);
+    glViewport(0, 0, real_width, real_height);
+    bool vsync = global_config->get("vsync", true);
+    if(vsync)
+    {
+        int vsync_ret = SDL_GL_SetSwapInterval(-1);
+        if(vsync_ret)
+        {
+            log->log(Logger::Level::WARNING, "Cannot use late swap tearing VSync (", SDL_GetError(), "), will use standard VSync");
+            log->check(SDL_GL_SetSwapInterval(1), 0, Logger::Level::ERROR, "Cannot enable VSync: ", SDL_GetError());
+        }
+    }
+    else
+    {
+        log->check(SDL_GL_SetSwapInterval(0), 0, Logger::Level::ERROR, "Cannot disable VSync: ", SDL_GetError());
+    }
 }
 
 Application::~Application()
