@@ -96,7 +96,7 @@ Application::Application(int argc, char** argv)
 #ifdef USE_GLDEBUG
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 #endif
-    bool fullscreen = global_config->get("fullscreen", true);
+    int fullscreen = global_config->get("fullscreen", 1);
     unsigned int width, height;
     if(fullscreen)
     {
@@ -111,12 +111,17 @@ Application::Application(int argc, char** argv)
         height = global_config->get("height", 600);
     }
     log->log(Logger::Level::INFO, "Window size is ", width, "x", height);
+    auto window_mode = SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_OPENGL;
+    if(fullscreen > 0)
+        window_mode |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    else if(fullscreen < 0)
+        window_mode |= SDL_WINDOW_BORDERLESS;
     window = SDL_CreateWindow(app_config->get("name", string("Arpeggio")).c_str(),
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
                               width,
                               height,
-                              SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_OPENGL | ((fullscreen) ? (SDL_WINDOW_FULLSCREEN) : (0)));
+                              window_mode);
     log->check(!window, false, Logger::Level::CRITICAL, "Unable to create window: ", SDL_GetError());
     SDL_SysWMinfo wminfo;
     SDL_VERSION(&wminfo.version);
@@ -162,6 +167,12 @@ Application::Application(int argc, char** argv)
         }
         log->log(Logger::Level::INFO, "Using display server \"", subsystem, "\"");
     }
+    bool show_cursor = global_config->get("show_cursor", false);
+    log->check(SDL_ShowCursor(show_cursor ? SDL_ENABLE : SDL_DISABLE) < 0,
+               false,
+               Logger::Level::ERROR,
+               "Cannot change cursor state: ",
+               SDL_GetError());
     glcon = SDL_GL_CreateContext(window);
     log->check(!glcon,
                false,
