@@ -122,9 +122,11 @@ Application::Application(int argc, char** argv)
     SDL_VERSION(&wminfo.version);
     auto wmret = SDL_GetWindowWMInfo(window, &wminfo);
     log->check(wmret, SDL_TRUE, Logger::Level::WARNING, "Unable to get display server info: ", SDL_GetError());
+    auto display_server = SDL_SYSWM_UNKNOWN;
     if(wmret == SDL_TRUE)
     {
         string subsystem;
+        display_server = wminfo.subsystem;
         switch(wminfo.subsystem)
         {
             case SDL_SYSWM_WINDOWS:
@@ -206,8 +208,11 @@ Application::Application(int argc, char** argv)
     int real_width, real_height;
     SDL_GL_GetDrawableSize(window, &real_width, &real_height);
     glViewport(0, 0, real_width, real_height);
-    bool vsync = global_config->get("vsync", true);
-    if(vsync)
+    int vsync_default_value = 1;
+    if(display_server == SDL_SYSWM_X11 || display_server == SDL_SYSWM_WINDOWS)
+        vsync_default_value = -1;
+    int vsync = global_config->get("vsync", vsync_default_value);
+    if(vsync < 0)
     {
         int vsync_ret = SDL_GL_SetSwapInterval(-1);
         if(vsync_ret)
@@ -215,6 +220,10 @@ Application::Application(int argc, char** argv)
             log->log(Logger::Level::WARNING, "Cannot use late swap tearing VSync (", SDL_GetError(), "), will use standard VSync");
             log->check(SDL_GL_SetSwapInterval(1), 0, Logger::Level::ERROR, "Cannot enable VSync: ", SDL_GetError());
         }
+    }
+    else if(vsync > 0)
+    {
+        log->check(SDL_GL_SetSwapInterval(1), 0, Logger::Level::ERROR, "Cannot enable VSync: ", SDL_GetError());
     }
     else
     {

@@ -6,6 +6,7 @@
 #include "ImageManager.hpp"
 #include "Logger.hpp"
 #include "ObjectManager.hpp"
+#include "Scenario.hpp"
 #include "Timer.hpp"
 
 class Application
@@ -16,6 +17,7 @@ protected:
     shared_ptr<Config> app_config;
     shared_ptr<ObjectManager> object_manager;
     shared_ptr<ImageManager> image_manager;
+    shared_ptr<Scenario> scenario;
     SDL_Window* window;
     SDL_GLContext glcon;
 
