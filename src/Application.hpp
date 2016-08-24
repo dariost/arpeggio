@@ -20,9 +20,11 @@ protected:
     shared_ptr<Scenario> scenario;
     SDL_Window* window;
     SDL_GLContext glcon;
+    bool should_quit;
 
 public:
     Application(int argc, char** argv);
     ~Application();
     int run();
+    friend void internal_run(void* _app);
 };

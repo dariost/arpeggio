@@ -5,6 +5,7 @@
 
 Application::Application(int argc, char** argv)
 {
+    should_quit = false;
 #ifdef UWP
     string log_output = string(SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER)) + "/arpeggio_stdout.txt";
     freopen(log_output.c_str(), "w", stdout);
@@ -240,10 +241,14 @@ Application::Application(int argc, char** argv)
     {
         log->check(SDL_GL_SetSwapInterval(0), 0, Logger::Level::ERROR, "Cannot disable VSync: ", SDL_GetError());
     }
+    auto initial_scenario = app_config->get("initial_scenario", vector<string>());
+    auto loading_scene = app_config->get<string>("loading_scene", "");
+    scenario = make_shared<Scenario>(log, real_width, real_height, initial_scenario, object_manager, window, loading_scene);
 }
 
 Application::~Application()
 {
+    scenario.reset();
     SDL_GL_DeleteContext(glcon);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -253,35 +258,26 @@ Application::~Application()
     SDL_Quit();
 }
 
-#include "Animation.hpp"
-#include "Shader.hpp"
+void internal_run(void* _app)
+{
+    Application* app = (Application*)_app;
+    app->scenario->exec();
+    app->scenario->draw();
+    SDL_Event e;
+    while((SDL_PollEvent(&e)))
+    {
+        if(e.type == SDL_QUIT)
+            app->should_quit = true;
+    }
+    SDL_Delay(0);
+}
 
 int Application::run()
 {
     // TODO: do something
-    auto shdr = make_shared<Shader>(log);
-    shdr->attach(default_vertex_shader.c_str(), GL_VERTEX_SHADER);
-    shdr->attach(default_fragment_shader.c_str(), GL_FRAGMENT_SHADER);
-    shdr->compile();
-    shdr->use();
-    vector<shared_ptr<Image>> v;
-    v.push_back(image_manager->getImage("image.png"));
-    v.front()->activateTexture();
-    auto anim = make_shared<Animation>(log, "test");
-    anim->setFrames(v);
-    bool quit = false;
-    SDL_Event e;
-    while(!quit)
+    while(!should_quit)
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        anim->draw();
-        glFlush();
-        SDL_GL_SwapWindow(window);
-        while((SDL_PollEvent(&e)))
-        {
-            if(e.type == SDL_QUIT)
-                quit = true;
-        }
+        internal_run(this);
     }
     return EXIT_SUCCESS;
 }
