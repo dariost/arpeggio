@@ -7,6 +7,30 @@ Config::Config(shared_ptr<Logger> logger, const string& debug_name, const string
     relative_name = rn;
 }
 
+json Config::get_json(const string& obj_name)
+{
+    log->check(internal.is_object(),
+               true,
+               Logger::Level::CRITICAL,
+               "Error while reading \"",
+               obj_name,
+               "\" from \"",
+               name,
+               "\": not an object");
+    json tmp;
+    try
+    {
+        tmp = internal[obj_name];
+    }
+    catch(exception& e)
+    {
+        log->log(Logger::Level::DEBUG, "Cannot read \"", obj_name, "\" from \"", name, "\": ", e.what(), "; using default value");
+        json dummy;
+        return dummy;
+    }
+    return tmp;
+}
+
 void Config::parseConfig(shared_ptr<Object> config)
 {
     name = config->getName();

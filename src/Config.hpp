@@ -43,6 +43,7 @@ public:
         }
         return tmp;
     }
+    json get_json(const string& obj_name);
     template <typename T>
     void set(const string& obj_name, const T& value = T())
     {

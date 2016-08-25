@@ -22,5 +22,5 @@ void Scene::exec()
 
 double Scene::getPriority()
 {
-    return 0.0;
+    return conf->get("render_priority", 0.0);
 }

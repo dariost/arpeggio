@@ -2,9 +2,17 @@
 
 #include "GLDebug.hpp"
 
-Animation::Animation(shared_ptr<Logger> logger, shared_ptr<Config> desc, shared_ptr<ImageManager> image_manager)
+double Animation::getAspectRatio()
 {
-    Animation(logger, desc->get<string>("name", "NULL"));
+    return aspect_ratio;
+}
+
+Animation::Animation(shared_ptr<Logger> logger,
+                     shared_ptr<Config> desc,
+                     shared_ptr<ImageManager> image_manager,
+                     const string& _name)
+{
+    Animation(logger, _name);
     setFPS(desc->get("fps", 1.0));
     auto num_frames = desc->get("num_frames", 1UL);
     string frames = desc->get<string>("frames", "image.png");
@@ -113,6 +121,7 @@ Animation::~Animation()
 void Animation::setFrames(const vector<shared_ptr<Image>>& v)
 {
     log->check(v.size() > 0, true, Logger::Level::CRITICAL, "Trying to feed animation \"", name, "\" with 0 frames");
+    aspect_ratio = double(v[0]->getWidth()) / double(v[0]->getHeight());
     for(size_t i = 1; i < v.size(); i++)
     {
         log->check(v[i]->getWidth(),

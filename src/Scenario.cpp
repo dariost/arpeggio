@@ -177,6 +177,12 @@ void Scenario::draw()
             glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
             glBindTexture(GL_TEXTURE_2D, texture[render_index]);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture[render_index], 0);
+#ifdef ARPEGGIO_DEBUG
+            log->check(glCheckFramebufferStatus(GL_FRAMEBUFFER),
+                       GLenum(GL_FRAMEBUFFER_COMPLETE),
+                       Logger::Level::CRITICAL,
+                       "Scenario framebuffer is not properly bound");
+#endif
             glClear(GL_COLOR_BUFFER_BIT);
             i.second->draw();
             glFlush();
