@@ -28,7 +28,7 @@ Actor::Actor(shared_ptr<Logger> logger,
     for(auto& i : animation)
     {
         auto tmp_conf = make_shared<Config>(log);
-        tmp_conf->parseConfig(om->getObject(string("animations/") + i.second + ".json"));
+        tmp_conf->parseConfig(om->getObject(string("animations/") + i.second + "/animation.json"));
         act[i.first] = make_shared<Animation>(log, tmp_conf, im, i.second);
     }
     log->check(

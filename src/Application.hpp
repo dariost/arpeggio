@@ -21,6 +21,8 @@ protected:
     SDL_Window* window;
     SDL_GLContext glcon;
     bool should_quit;
+    int real_width;
+    int real_height;
 
 public:
     Application(int argc, char** argv);

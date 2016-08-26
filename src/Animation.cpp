@@ -35,7 +35,7 @@ Animation::Animation(shared_ptr<Logger> logger,
     // End OpenGL stuff
     setFPS(desc->get("fps", 1.0));
     auto num_frames = desc->get("num_frames", 1UL);
-    string frames = name + string("/") + desc->get<string>("frames", "image.png");
+    string frames = desc->get<string>("frames", "image.png");
     string tmp = desc->getRelativeName();
     while(tmp.back() != '/' && tmp.back() != '\\')
     {

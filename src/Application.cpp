@@ -32,10 +32,10 @@ Application::Application(int argc, char** argv)
     base_path = string(SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER)) + "/";
 #endif
     object_manager = make_shared<ObjectManager>(log, base_path);
-    global_config = make_shared<Config>(log, "config.json");
-    app_config = make_shared<Config>(log, "app.json");
-    global_config->parseConfig(object_manager->getObject("config.json", false)->getString());
-    app_config->parseConfig(object_manager->getObject("app.json")->getString());
+    global_config = make_shared<Config>(log);
+    app_config = make_shared<Config>(log);
+    global_config->parseConfig(object_manager->getObject("config.json", false));
+    app_config->parseConfig(object_manager->getObject("app.json"));
     unsigned int sdl_init_flags = SDL_INIT_EVERYTHING;
 #ifdef __EMSCRIPTEN__
     sdl_init_flags ^= (SDL_INIT_TIMER | SDL_INIT_HAPTIC);
@@ -217,7 +217,6 @@ Application::Application(int argc, char** argv)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBlendEquation(GL_FUNC_ADD);
-    int real_width, real_height;
     SDL_GL_GetDrawableSize(window, &real_width, &real_height);
     glViewport(0, 0, real_width, real_height);
     int vsync_default_value = 1;
@@ -261,6 +260,7 @@ Application::~Application()
 
 void internal_run(void* _app)
 {
+    static bool already_reset = false;
     Application* app = (Application*)_app;
     app->scenario->exec();
     app->scenario->draw();
@@ -268,7 +268,32 @@ void internal_run(void* _app)
     while((SDL_PollEvent(&e)))
     {
         if(e.type == SDL_QUIT)
+        {
             app->should_quit = true;
+        }
+#ifdef ARPEGGIO_DEBUG
+        else if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_F5 && !already_reset)
+        {
+            already_reset = true;
+            app->app_config = make_shared<Config>(app->log);
+            app->app_config->parseConfig(app->object_manager->getObject("app.json"));
+            auto initial_scenario = app->app_config->get("initial_scenario", vector<string>());
+            auto loading_scene = app->app_config->get<string>("loading_scene", "");
+            auto tmp_scenario = make_shared<Scenario>(app->log,
+                                                      app->real_width,
+                                                      app->real_height,
+                                                      initial_scenario,
+                                                      app->object_manager,
+                                                      app->image_manager,
+                                                      app->window,
+                                                      loading_scene);
+            app->scenario = tmp_scenario;
+        }
+        else if(e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_F5)
+        {
+            already_reset = false;
+        }
+#endif
     }
     SDL_Delay(0);
 }
