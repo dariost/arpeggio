@@ -272,6 +272,10 @@ void internal_run(void* _app)
             app->should_quit = true;
         }
 #ifdef ARPEGGIO_DEBUG
+        else if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
+        {
+            app->should_quit = true;
+        }
         else if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_F5 && !already_reset)
         {
             already_reset = true;
@@ -300,7 +304,6 @@ void internal_run(void* _app)
 
 int Application::run()
 {
-    // TODO: do something
     while(!should_quit)
     {
         internal_run(this);
