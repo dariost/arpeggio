@@ -12,10 +12,30 @@ Animation::Animation(shared_ptr<Logger> logger,
                      shared_ptr<ImageManager> image_manager,
                      const string& _name)
 {
-    Animation(logger, _name);
+    log = logger;
+    name = _name;
+    fps = 1.0;
+    data = {-1.0, -1.0, 0.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0};
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+#ifdef USE_GLDEBUG
+    string debug_name = "\"" + name + "\"";
+    fpObjectLabel(GL_VERTEX_ARRAY, vao, debug_name.size(), debug_name.data());
+    fpObjectLabel(GL_BUFFER, vbo, debug_name.size(), debug_name.data());
+#endif
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    // End OpenGL stuff
     setFPS(desc->get("fps", 1.0));
     auto num_frames = desc->get("num_frames", 1UL);
-    string frames = desc->get<string>("frames", "image.png");
+    string frames = name + string("/") + desc->get<string>("frames", "image.png");
     string tmp = desc->getRelativeName();
     while(tmp.back() != '/' && tmp.back() != '\\')
     {
@@ -38,9 +58,10 @@ Animation::Animation(shared_ptr<Logger> logger,
     }
     free(buffer);
     reverse(frame_names.begin(), frame_names.end());
-    vector<shared_ptr<Image>> image_data;
+    vector<shared_ptr<Image>> image_data(num_frames);
     vector<pair<future<shared_ptr<Image>>, size_t>> futures;
-    while(image_data.size() < num_frames)
+    size_t frames_processed = 0;
+    while(frames_processed < num_frames)
     {
         while(futures.size() < num_cores && frame_names.size())
         {
@@ -57,6 +78,7 @@ Animation::Animation(shared_ptr<Logger> logger,
             if(status == future_status::ready)
             {
                 image_data[futures[i].second] = futures[i].first.get();
+                frames_processed++;
                 swap(futures[i], futures.back());
                 futures.pop_back();
                 i--;
@@ -64,30 +86,6 @@ Animation::Animation(shared_ptr<Logger> logger,
         }
     }
     setFrames(image_data);
-}
-
-Animation::Animation(shared_ptr<Logger> logger, const string& anim_name)
-{
-    log = logger;
-    name = anim_name;
-    fps = 1.0;
-    data = {-1.0, -1.0, 0.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0};
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-#ifdef USE_GLDEBUG
-    string debug_name = "\"" + name + "\"";
-    fpObjectLabel(GL_VERTEX_ARRAY, vao, debug_name.size(), debug_name.data());
-    fpObjectLabel(GL_BUFFER, vbo, debug_name.size(), debug_name.data());
-#endif
-    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
 }
 
 void Animation::updateData(const array<GLfloat, 16>& d)

@@ -243,7 +243,8 @@ Application::Application(int argc, char** argv)
     }
     auto initial_scenario = app_config->get("initial_scenario", vector<string>());
     auto loading_scene = app_config->get<string>("loading_scene", "");
-    scenario = make_shared<Scenario>(log, real_width, real_height, initial_scenario, object_manager, window, loading_scene);
+    scenario =
+        make_shared<Scenario>(log, real_width, real_height, initial_scenario, object_manager, image_manager, window, loading_scene);
 }
 
 Application::~Application()

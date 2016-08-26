@@ -7,6 +7,29 @@ Config::Config(shared_ptr<Logger> logger, const string& debug_name, const string
     relative_name = rn;
 }
 
+vector<json> Config::getv(const string& obj_name)
+{
+    log->check(internal.is_object(),
+               true,
+               Logger::Level::CRITICAL,
+               "Error while reading \"",
+               obj_name,
+               "\" from \"",
+               name,
+               "\": not an object");
+    if(!internal.count(obj_name))
+        return vector<json>();
+    if(!internal[obj_name].is_array())
+    {
+        log->log(Logger::Level::ERROR, "Error while reading \"", obj_name, "\" from \"", name, "\": not an array");
+        return vector<json>();
+    }
+    vector<json> tmp;
+    for(auto it = internal[obj_name].begin(); it != internal[obj_name].end(); ++it)
+        tmp.push_back(*it);
+    return move(tmp);
+}
+
 json Config::get_json(const string& obj_name)
 {
     log->check(internal.is_object(),
@@ -53,6 +76,11 @@ void Config::parseConfig(const string& config)
 string Config::getConfig()
 {
     return internal.dump(4);
+}
+
+string Config::getName()
+{
+    return name;
 }
 
 string Config::getRelativeName()

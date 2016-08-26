@@ -7,17 +7,25 @@ Scenario::Scenario(shared_ptr<Logger> logger,
                    uint32_t _height,
                    const vector<string>& initial_scenes,
                    shared_ptr<ObjectManager> om,
+                   shared_ptr<ImageManager> im,
                    SDL_Window* _window,
                    const string& loading_scene_name)
 {
     log = logger;
     window = _window;
     object_manager = om;
+    image_manager = im;
     width = _width;
     height = _height;
     is_loading_scene = false;
+    auto default_shader = make_shared<Shader>(log);
+    default_shader->attach(default_vertex_shader.c_str(), GL_VERTEX_SHADER, "default_vertex_shader");
+    default_shader->attach(default_fragment_shader.c_str(), GL_FRAGMENT_SHADER, "default_fragment_shader");
+    default_shader->compile();
+    default_shader->use();
+    shader["ARPEGGIO_DEFAULT_SHADER"] = default_shader;
     // VAO and VBO
-    vector<GLfloat> data = {-1.0, -1.0, 0.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0};
+    vector<GLfloat> data = {-1.0, -1.0, 0.0, 0.0, 1.0, -1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0};
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
     glBindVertexArray(vao);
@@ -60,11 +68,13 @@ Scenario::Scenario(shared_ptr<Logger> logger,
     if(loading_scene_name != "")
     {
         auto obj = object_manager->getObject(string("scenes/") + loading_scene_name + "/scene.json");
-        auto conf = make_shared<Config>(log, obj->getName(), obj->getRelativeName());
-        auto scn = make_shared<Scene>(log, loading_scene_name, conf);
+        auto conf = make_shared<Config>(log);
+        conf->parseConfig(obj);
+        auto scn = make_shared<Scene>(log, loading_scene_name, conf, width, height, image_manager, object_manager);
         loading_scene = scn;
         loading_scene->activateTextures();
     }
+    log->check(initial_scenes.size() != 0, true, Logger::Level::WARNING, "There are no scenes in the scenario");
     for(const auto& i : initial_scenes)
         to_be_added.push(i);
     finalize();
@@ -78,8 +88,9 @@ unordered_map<string, shared_ptr<Scene>> Scenario::load_scenes()
         string top = to_be_added.front();
         to_be_added.pop();
         auto obj = object_manager->getObject(string("scenes/") + top + "/scene.json");
-        auto conf = make_shared<Config>(log, obj->getName(), obj->getRelativeName());
-        auto scn = make_shared<Scene>(log, top, conf);
+        auto conf = make_shared<Config>(log);
+        conf->parseConfig(obj);
+        auto scn = make_shared<Scene>(log, top, conf, width, height, image_manager, object_manager);
         tmp_ret[top] = scn;
     }
     return tmp_ret;

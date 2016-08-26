@@ -14,20 +14,25 @@ Actor::Actor(shared_ptr<Logger> logger,
     om = _om;
     camera = _camera;
     main_height = conf->get("height", 1.0);
-    auto animation_json = conf->get_json("act");
+    auto animation_json = conf->get_json("acts");
     unordered_map<string, string> animation;
+    bool at_least_one = false;
     for(auto it = animation_json.begin(); it != animation_json.end(); ++it)
+    {
         animation[it.key()] = it.value();
-    custom_height = conf->get<unordered_map<string, double>>("act_height");
+        at_least_one = true;
+    }
+    log->check(at_least_one, true, Logger::Level::WARNING, "Actor \"", name, "\" has no acts");
+    custom_height = conf->get<unordered_map<string, double>>("acts_height");
     current_act = conf->get<string>("main_act");
-    log->check(
-        act.count(current_act), 1UL, Logger::Level::CRITICAL, "Actor \"", name, "\" doesn't know how to \"", current_act, "\"");
     for(auto& i : animation)
     {
         auto tmp_conf = make_shared<Config>(log);
         tmp_conf->parseConfig(om->getObject(string("animations/") + i.second + ".json"));
         act[i.first] = make_shared<Animation>(log, tmp_conf, im, i.second);
     }
+    log->check(
+        act.count(current_act), 1UL, Logger::Level::CRITICAL, "Actor \"", name, "\" doesn't know how to \"", current_act, "\"");
 }
 
 void Actor::changeAct(const string& new_act)
@@ -35,6 +40,26 @@ void Actor::changeAct(const string& new_act)
     current_act = new_act;
     log->check(
         act.count(current_act), 1UL, Logger::Level::CRITICAL, "Actor \"", name, "\" doesn't know how to \"", current_act, "\"");
+}
+
+double Actor::getWidth()
+{
+    log->check(
+        act.count(current_act), 1UL, Logger::Level::CRITICAL, "Actor \"", name, "\" doesn't know how to \"", current_act, "\"");
+    double height = main_height;
+    if(custom_height.count(current_act))
+        height = custom_height[current_act];
+    return height * act[current_act]->getAspectRatio();
+}
+
+double Actor::getHeight()
+{
+    log->check(
+        act.count(current_act), 1UL, Logger::Level::CRITICAL, "Actor \"", name, "\" doesn't know how to \"", current_act, "\"");
+    double height = main_height;
+    if(custom_height.count(current_act))
+        height = custom_height[current_act];
+    return height;
 }
 
 void Actor::exec(double pos_x, double pos_y, double horiz_perc, double vert_perc)

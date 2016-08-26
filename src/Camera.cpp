@@ -8,12 +8,22 @@ Camera::Camera(shared_ptr<Logger> logger, double _real_width, double _real_heigh
     height = _height;
     pos_x = _pos_x;
     pos_y = _pos_y;
+    width = height * real_width / real_height;
+}
+
+double Camera::getWidth()
+{
+    return width;
+}
+
+double Camera::getHeight()
+{
+    return height;
 }
 
 pair<double, double> Camera::getPoint(double x, double y)
 {
     pair<double, double> tmp;
-    double width = height * real_width / real_height;
     x -= pos_x;
     y -= pos_y;
     tmp.first = 2.0 * x / width;

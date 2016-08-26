@@ -23,7 +23,6 @@ protected:
     double aspect_ratio;
 
 public:
-    Animation(shared_ptr<Logger> logger, const string& anim_name);
     Animation(shared_ptr<Logger> logger, shared_ptr<Config> desc, shared_ptr<ImageManager> image_manager, const string& _name);
     ~Animation();
     void setFrames(const vector<shared_ptr<Image>>& v);

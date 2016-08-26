@@ -2,9 +2,11 @@
 
 #include "global.hpp"
 
+#include "ImageManager.hpp"
 #include "Logger.hpp"
 #include "ObjectManager.hpp"
 #include "Scene.hpp"
+#include "Shader.hpp"
 
 class Scenario
 {
@@ -17,6 +19,7 @@ protected:
     bool is_loading_scene;
     future<unordered_map<string, shared_ptr<Scene>>> future_scenes;
     shared_ptr<ObjectManager> object_manager;
+    shared_ptr<ImageManager> image_manager;
     const size_t initial_textures = 32;
     uint32_t width;
     uint32_t height;
@@ -29,6 +32,7 @@ protected:
     size_t render_index;
     GLuint vao;
     GLuint vbo;
+    unordered_map<string, shared_ptr<Shader>> shader;
 
 public:
     Scenario(shared_ptr<Logger> logger,
@@ -36,6 +40,7 @@ public:
              uint32_t _height,
              const vector<string>& initial_scenes,
              shared_ptr<ObjectManager> om,
+             shared_ptr<ImageManager> im,
              SDL_Window* _window,
              const string& loading_scene_name);
     void exec();

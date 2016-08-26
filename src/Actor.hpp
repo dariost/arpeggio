@@ -33,4 +33,6 @@ public:
     void exec(double pos_x, double pos_y, double horiz_perc = 1.0, double vert_perc = 1.0);
     void draw();
     void changeAct(const string& new_act);
+    double getWidth();
+    double getHeight();
 };

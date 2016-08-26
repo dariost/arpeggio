@@ -16,6 +16,7 @@ protected:
 public:
     Config(shared_ptr<Logger> logger, const string& debug_name = "(default)", const string& rn = "NULL");
     string getRelativeName();
+    string getName();
     void parseConfig(const string& config);
     void parseConfig(shared_ptr<Object> config);
     string getConfig();
@@ -43,6 +44,7 @@ public:
         }
         return tmp;
     }
+    vector<json> getv(const string& obj_name);
     json get_json(const string& obj_name);
     template <typename T>
     void set(const string& obj_name, const T& value = T())
