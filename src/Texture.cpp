@@ -1,7 +1,12 @@
 #include "Texture.hpp"
 #include "GLDebug.hpp"
 
-Texture::Texture(shared_ptr<Logger> logger, uint32_t width, uint32_t height, const vector<uint8_t>& data, string name)
+Texture::Texture(shared_ptr<Logger> logger,
+                 uint32_t width,
+                 uint32_t height,
+                 const vector<uint8_t>& data,
+                 const string& name,
+                 bool pixelated)
 {
     log = logger;
     path = name;
@@ -17,7 +22,7 @@ Texture::Texture(shared_ptr<Logger> logger, uint32_t width, uint32_t height, con
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, pixelated ? GL_NEAREST : GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

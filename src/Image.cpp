@@ -1,8 +1,9 @@
 #include "Image.hpp"
 
-Image::Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_factor)
+Image::Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_factor, bool _pixelated)
 {
     log = logger;
+    pixelated = _pixelated;
     path = obj->getName();
     SDL_RWops* rwops = SDL_RWFromConstMem(obj->getData(), obj->getSize());
     log->check(!rwops, false, Logger::Level::CRITICAL, "Cannot get a pointer to \"", path, "\": ", SDL_GetError());
@@ -93,7 +94,7 @@ void Image::activateTexture(bool toggle)
     if((toggle && isTextureActive()) || (!toggle && !isTextureActive()))
         return;
     if(toggle)
-        texture = make_shared<Texture>(log, width, height, data, path);
+        texture = make_shared<Texture>(log, width, height, data, path, pixelated);
     else
         texture.reset();
 }

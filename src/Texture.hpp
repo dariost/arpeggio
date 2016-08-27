@@ -12,7 +12,12 @@ protected:
     string path;
 
 public:
-    Texture(shared_ptr<Logger> logger, uint32_t width, uint32_t height, const vector<uint8_t>& data, string name);
+    Texture(shared_ptr<Logger> logger,
+            uint32_t width,
+            uint32_t height,
+            const vector<uint8_t>& data,
+            const string& name,
+            bool pixelated);
     void bind();
     ~Texture();
 };

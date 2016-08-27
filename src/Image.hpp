@@ -15,9 +15,10 @@ protected:
     uint32_t height;
     vector<uint8_t> data;
     shared_ptr<Texture> texture;
+    bool pixelated;
 
 public:
-    Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_factor);
+    Image(shared_ptr<Logger> logger, shared_ptr<Object> obj, uint32_t scale_factor, bool _pixelated);
     uint32_t getWidth();
     uint32_t getHeight();
     void* getData();
