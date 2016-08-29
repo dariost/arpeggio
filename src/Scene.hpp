@@ -17,6 +17,7 @@ protected:
     public:
         double pos_x;
         double pos_y;
+        double absolute_priority;
         shared_ptr<Actor> actor;
         void exec()
         {
@@ -26,9 +27,10 @@ protected:
         {
             actor->draw();
         }
-        actor_data(shared_ptr<Actor> _actor, double _pos_x, double _pos_y)
+        actor_data(shared_ptr<Actor> _actor, double _pos_x, double _pos_y, double _absolute_priority)
         {
             actor = _actor;
+            absolute_priority = _absolute_priority;
             pos_x = _pos_x;
             pos_y = _pos_y;
         }
@@ -37,14 +39,18 @@ protected:
             actor = o.actor;
             pos_x = o.pos_x;
             pos_y = o.pos_y;
+            absolute_priority = o.absolute_priority;
         }
         actor_data()
         {
             pos_x = 0.0;
             pos_y = 0.0;
+            absolute_priority = 0.0;
         }
         bool operator<(const actor_data& o) const
         {
+            if(absolute_priority != o.absolute_priority)
+                return absolute_priority < o.absolute_priority;
             if(pos_y != o.pos_y)
                 return pos_y < o.pos_y;
             return pos_x < o.pos_x;
