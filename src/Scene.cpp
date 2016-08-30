@@ -42,7 +42,7 @@ Scene::Scene(shared_ptr<Logger> logger,
         string actor_pos_y = c->get<string>("pos_y", "0.0");
         string actor_class = c->get<string>("class");
         string actor_name = c->get<string>("name");
-        double absolute_priority = c->get("name", 0.0);
+        double absolute_priority = c->get("absolute_priority", 0.0);
         auto actor_class_conf = make_shared<Config>(log);
         actor_class_conf->parseConfig(om->getObject(string("actors/") + actor_class + "/actor.json"));
         auto tmp_actor = make_shared<Actor>(log, actor_name, actor_class_conf, im, om, camera);
