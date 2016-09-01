@@ -1343,7 +1343,7 @@
         }
     ], 
     "comment": "Metadata for Duktape build", 
-    "duk_version": 10500, 
-    "duk_version_string": "1.5.0", 
-    "git_describe": "v1.5.0"
+    "duk_version": 10501, 
+    "duk_version_string": "1.5.1", 
+    "git_describe": "v1.5.1"
 }

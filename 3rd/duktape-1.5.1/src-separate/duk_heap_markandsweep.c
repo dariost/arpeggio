@@ -648,7 +648,7 @@ DUK_LOCAL void duk__sweep_stringtable_probe(duk_heap *heap, duk_size_t *out_coun
 
 	for (i = 0; i < heap->st_size; i++) {
 #if defined(DUK_USE_HEAPPTR16)
-		h = (duk_hstring *) DUK_USE_HEAPPTR_DEC16(heap->strtable16[i]);
+		h = (duk_hstring *) DUK_USE_HEAPPTR_DEC16(heap->heap_udata, heap->strtable16[i]);
 #else
 		h = heap->strtable[i];
 #endif
@@ -1306,6 +1306,9 @@ DUK_INTERNAL duk_bool_t duk_heap_mark_and_sweep(duk_heap *heap, duk_small_uint_t
 
 	/* XXX: stringtable emergency compaction? */
 
+	/* XXX: remove this feature entirely? it would only matter for
+	 * emergency GC.  Disable for lowest memory builds.
+	 */
 #if defined(DUK_USE_MS_STRINGTABLE_RESIZE)
 	if (!(flags & DUK_MS_FLAG_NO_STRINGTABLE_RESIZE)) {
 		DUK_DD(DUK_DDPRINT("resize stringtable: %p", (void *) heap));
