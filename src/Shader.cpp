@@ -48,7 +48,7 @@ void Shader::attach(const char* str, GLenum type, const string& shader_name)
     fpObjectLabel(GL_SHADER, shdr, shader_name_debug.size(), shader_name_debug.data());
 #endif
     string true_shader;
-#ifdef ARPEGGIO_GLES
+#if defined(ARPEGGIO_GLES) || defined(__HAIKU__)
     true_shader += "#version 300 es\n";
     true_shader += "precision mediump float;\n";
 #else
