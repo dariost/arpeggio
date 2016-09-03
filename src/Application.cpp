@@ -37,9 +37,6 @@ Application::Application(int argc, char** argv)
     global_config->parseConfig(object_manager->getObject("config.json", false));
     app_config->parseConfig(object_manager->getObject("app.json"));
     unsigned int sdl_init_flags = SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS;
-#ifdef __HAIKU__
-    sdl_init_flags ^= SDL_INIT_GAMECONTROLLER;
-#endif
     log->check(SDL_Init(sdl_init_flags), 0, Logger::Level::CRITICAL, "Unable to initialize system: ", SDL_GetError());
     log->check(IMG_Init(IMG_INIT_PNG | IMG_INIT_WEBP) & (IMG_INIT_PNG | IMG_INIT_WEBP),
                (int)(IMG_INIT_PNG | IMG_INIT_WEBP),
