@@ -68,7 +68,7 @@ if(USE_GLEW)
     endif()
 endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Haiku")
-    set(LIBS ${LIBS} be game media)
+    set(LIBS ${LIBS} be game media device)
 endif()
 
 if(USE_GLEW)
