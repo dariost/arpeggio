@@ -1293,11 +1293,17 @@ elseif(APPLE)
 endif()
 if(HAIKU)
   if(SDL_VIDEO)
-    set(SDL_VIDEO_DRIVER_HAIKU 1)
     set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -fpermissive)
+
+    set(SDL_VIDEO_DRIVER_HAIKU 1)
     file(GLOB HAIKUVIDEO_SOURCES ${SDL2_SOURCE_DIR}/src/video/haiku/*.cc ${SDL2_SOURCE_DIR}/src/main/haiku/*.cc)
     set(SOURCE_FILES ${SOURCE_FILES} ${HAIKUVIDEO_SOURCES})
     set(HAVE_SDL_VIDEO TRUE)
+
+    set(SDL_AUDIO_DRIVER_HAIKU 1)
+    file(GLOB HAIKUAUDIO_SOURCES ${SDL2_SOURCE_DIR}/src/audio/haiku/*.cc)
+    set(SOURCE_FILES ${SOURCE_FILES} ${HAIKUAUDIO_SOURCES})
+    set(HAVE_SDL_AUDIO TRUE)
 
     set(SDL_FILESYSTEM_HAIKU 1)
     file(GLOB FILESYSTEM_SOURCES ${SDL2_SOURCE_DIR}/src/filesystem/haiku/*.cc)
