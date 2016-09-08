@@ -80,7 +80,7 @@ set(hashlib2plus_INCLUDES ${bz2_SOURCE_DIR}/hashlib2plus-0.3.4/src PARENT_SCOPE)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static freetype")
 option(WITH_HarfBuzz "Disable OpenType" OFF)
 option(WITH_BZip2 "Disable BZip2" OFF)
-add_subdirectory(freetype-2.6.5)
+add_subdirectory(freetype-2.7)
 set(freetype_INCLUDES ${freetype_SOURCE_DIR}/include PARENT_SCOPE)
 set(freetype_INCLUDES ${freetype_SOURCE_DIR}/include)
 
