@@ -70,6 +70,9 @@ endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Haiku")
     set(LIBS ${LIBS} be game media device)
 endif()
+if(ANDROID)
+    set(LIBS ${LIBS} log android)
+endif()
 
 if(USE_GLEW)
     set(GLOBAL_INCLUDES ${GLOBAL_INCLUDES} ${glew_INCLUDES})
@@ -101,7 +104,7 @@ if(UNIX)
     endif()
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+if(CMAKE_COMPILER_IS_GNUCXX AND (NOT ANDROID))
     set(LIBS ${LIBS} -static-libgcc -static-libstdc++)
 endif()
 
