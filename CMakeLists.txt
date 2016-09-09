@@ -154,4 +154,8 @@ if(MINGW)
     set(DEFS ${DEFS} SDL_MAIN_HANDLED)
 endif()
 
+if(ANDROID)
+    set(DEFS ${DEFS} JSON_ANDROID_WORKAROUNDS)
+endif()
+
 target_compile_definitions(arpeggio PRIVATE ${DEFS})
