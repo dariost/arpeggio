@@ -27,7 +27,7 @@ vector<json> Config::getv(const string& obj_name)
     vector<json> tmp;
     for(auto it = internal[obj_name].begin(); it != internal[obj_name].end(); ++it)
         tmp.push_back(*it);
-    return move(tmp);
+    return tmp;
 }
 
 json Config::get_json(const string& obj_name)
