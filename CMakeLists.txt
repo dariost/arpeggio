@@ -105,7 +105,7 @@ if(UNIX)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX AND (NOT ANDROID))
-    set(LIBS ${LIBS} -static-libgcc -static-libstdc++)
+    set(LIBS ${LIBS} -static-libstdc++)
 endif()
 
 if(NOT MSVC)
