@@ -97,6 +97,7 @@ if(MINGW)
 endif()
 
 if(UNIX)
+    set(LIBS ${LIBS} pthread)
     set(LIBS ${LIBS} -Wl,-O1,--sort-common,--as-needed,-z,relro)
     if((CMAKE_SYSTEM_NAME STREQUAL "Linux") AND (NOT DEBUG))
         set(FLAGS ${FLAGS} -flto)
