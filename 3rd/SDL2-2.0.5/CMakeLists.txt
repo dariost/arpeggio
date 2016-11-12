@@ -197,8 +197,8 @@ endif()
 set(SDL_LIBS "-lSDL2")
 set(SDL_CFLAGS "")
 
-# Emscripten toolchain has a nonempty default value for this, and the checks 
-# in this file need to change that, so remember the original value, and 
+# Emscripten toolchain has a nonempty default value for this, and the checks
+# in this file need to change that, so remember the original value, and
 # restore back to that afterwards. For check_function_exists() to work in
 # Emscripten, this value must be at its default value.
 set(ORIG_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
@@ -226,7 +226,7 @@ include_directories(${SDL2_BINARY_DIR}/include ${SDL2_SOURCE_DIR}/include)
 set(OPT_DEF_ASM TRUE)
 if(EMSCRIPTEN)
   # Set up default values for the currently supported set of subsystems:
-  # Emscripten/Javascript does not have assembly support, a dynamic library 
+  # Emscripten/Javascript does not have assembly support, a dynamic library
   # loading architecture, low-level CPU inspection or multithreading.
   set(OPT_DEF_ASM FALSE)
   set(SDL_SHARED_ENABLED_BY_DEFAULT OFF)
@@ -363,7 +363,7 @@ if(USE_GCC OR USE_CLANG)
   if(HAVE_GCC_WDECLARATION_AFTER_STATEMENT)
     check_c_compiler_flag(-Werror=declaration-after-statement HAVE_GCC_WERROR_DECLARATION_AFTER_STATEMENT)
     if(HAVE_GCC_WERROR_DECLARATION_AFTER_STATEMENT)
-      list(APPEND EXTRA_CFLAGS "-Werror=declaration-after-statement")
+      # list(APPEND EXTRA_CFLAGS "-Werror=declaration-after-statement")
     endif()
     list(APPEND EXTRA_CFLAGS "-Wdeclaration-after-statement")
   endif()
@@ -754,6 +754,8 @@ if(ANDROID)
   if(SDL_VIDEO)
     set(SDL_VIDEO_DRIVER_ANDROID 1)
     file(GLOB ANDROID_VIDEO_SOURCES ${SDL2_SOURCE_DIR}/src/video/android/*.c)
+    add_definitions(-DGL_GLEXT_PROTOTYPES)
+    add_definitions(-DSDL_RENDER_DISABLED)
     set(SOURCE_FILES ${SOURCE_FILES} ${ANDROID_VIDEO_SOURCES})
     set(HAVE_SDL_VIDEO TRUE)
 
@@ -873,7 +875,7 @@ elseif(UNIX AND NOT APPLE)
         #include <linux/kd.h>
         #include <linux/keyboard.h>
 
-        int main(int argc, char **argv) 
+        int main(int argc, char **argv)
         {
             struct kbentry kbe;
             kbe.kb_table = KG_CTRL;

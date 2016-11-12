@@ -2,5 +2,6 @@ test
 bin
 build
 data
+android
 *.o
 *.obj

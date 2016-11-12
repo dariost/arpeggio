@@ -125,7 +125,11 @@ if(NOT MSVC)
     endif()
 endif()
 
-add_executable(arpeggio ${SOURCES})
+if(ANDROID)
+    add_library(arpeggio SHARED ${SOURCES})
+else()
+    add_executable(arpeggio ${SOURCES})
+endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 	add_dependencies(arpeggio SDL-UWP)
@@ -138,6 +142,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "WindowsStore")
 elseif(MSVC AND (NOT DEBUG))
     set_target_properties(arpeggio PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
 	set_target_properties(arpeggio PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
+endif()
+
+if(ANDROID)
+    list(REMOVE_ITEM LIBS "pthread")
 endif()
 
 target_include_directories(arpeggio PRIVATE ${GLOBAL_INCLUDES})
