@@ -105,7 +105,7 @@ target_compile_definitions(SDL2_ttf PRIVATE ${IDEFS})
 set(SDL2_ttf_INCLUDES ${SDL2_ttf_SOURCE_DIR}/SDL2_ttf-2.0.14 PARENT_SCOPE)
 
 project(duktape)
-file(GLOB duktape_SOURCES duktape-1.5.1/src/*.c)
+file(GLOB duktape_SOURCES duktape-1.6.0/src/*.c)
 add_library(duktape STATIC ${duktape_SOURCES})
 target_compile_options(duktape PRIVATE ${IFLAGS})
 target_compile_definitions(duktape PRIVATE ${IDEFS})
