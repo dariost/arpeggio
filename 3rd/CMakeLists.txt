@@ -109,7 +109,7 @@ file(GLOB duktape_SOURCES duktape-1.6.0/src/*.c)
 add_library(duktape STATIC ${duktape_SOURCES})
 target_compile_options(duktape PRIVATE ${IFLAGS})
 target_compile_definitions(duktape PRIVATE ${IDEFS})
-set(duktape_INCLUDES ${duktape_SOURCE_DIR}/duktape-1.5.1/src PARENT_SCOPE)
+set(duktape_INCLUDES ${duktape_SOURCE_DIR}/duktape-1.6.0/src PARENT_SCOPE)
 
 if(USE_GLEW)
     project(glew)
